@@ -1,0 +1,16 @@
+h2 {
+	font-family: courier;
+}
+
+hr {
+	width: 40%;
+	margin: 0;
+}
+
+input[type="submit"] {
+	margin: 5px 0px;
+}
+
+form {
+	padding-top: 10px;
+}
