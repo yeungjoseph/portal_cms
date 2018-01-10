@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<title>Edit Page</title>
-		<link rel="stylesheet" type="text/css" href="main.css">
-		<link rel="stylesheet" type="text/css" href="admin.css">
+		<link rel="stylesheet" type="text/css" href="main.css"/>
+		<link rel="stylesheet" type="text/css" href="admin.css"/>
 	</head>
 	
 	<body>
@@ -14,29 +14,30 @@
 			<a href="./admin.html" id="login">Logout</a>	
 		</nav>
 		
-		<div class="content">
+		<div class="content" id="bg">
 			<form>
 			<!-- Title -->
-				<label>Title:</label> <br>
-				<input type="text" placeholder="Title of Page"> <br>
+				<label class="prettylabel">Title:</label> <br/>
+				<input type="text" name="title" placeholder="Title of Page" class="formbg" required/> <br/>
 			<!-- Content -->
-				<label>Content:</label> <br>
-				<input type="text" placeholder="User Content" class="bigtext"> <br>
+				<label class="prettylabel">Content:</label> <br/>
+				<textarea name="content" class="formbg" rows="10" cols="50">User Content Here</textarea> <br/>
 			<!-- Optional Content -->
-				<label>Optional content:</label> <br>
-				<input type="text" placeholder="Optional Content"> <br>
+				<label class="prettylabel">Optional content:</label> <br/>
+				<textarea name="opt-content" class="formbg" rows="10" cols="50">Optional Content Here</textarea> <br/>
 			<!-- URL -->
-				<label>URL:</label> <br>
-				<input type="text" placeholder="URL of page"> <br>
+				<label class="prettylabel">URL:</label> <br/>
+				<input type="text" class="formbg" name="URL" placeholder="URL of page"/> <br/>
 			<!-- Template -->
-				<label>Template:</label> <br>
-				<select name="template">
+				<label class="prettylabel">Template:</label> <br/>
+				<select name="template" class="formbg" required>
 					<option value="t1">Template 1</option>
 					<option value="t2">Template 2</option>
 					<option value="t3">Template 3</option>
-				</select> <br>
-			<!-- Save -->
-				<input type="submit" value="Save">
+				</select> <br/>
+			<!-- Clear/Save -->
+				<input type="reset" value="Clear"/>
+				<input type="submit" value="Save"/>
 			</form>
 		</div>
 		

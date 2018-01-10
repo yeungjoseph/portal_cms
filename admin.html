@@ -2,8 +2,8 @@
 <html>
 	<head>
 		<title>Admin Login</title>
-		<link rel="stylesheet" type="text/css" href="main.css">
-		<link rel="stylesheet" type="text/css" href="admin.css">
+		<link rel="stylesheet" type="text/css" href="main.css"/>
+		<link rel="stylesheet" type="text/css" href="admin.css"/>
 	</head>
 	
 	<body>
@@ -19,24 +19,26 @@
 		</nav>
 		
 		<div class="content">
-			<h2>Sign up</h2><hr>
+			<h2>Sign up</h2> <hr/>
 			<!-- Registration form -->
 			<form>
-				Email:<br>
-				<input type="text" placeholder="username@example.com"> <br>
-				Password:<br>
-				<input type="text" placeholder="Password"> <br>
-				<input type="submit" value="Register">
+				<label>Email:</label> <br/>
+				<input type="email" placeholder="username@example.com" required> <br/>
+				<label>Password:</label> <br/>
+				<input type="password" required /> <br/>
+				<input type="reset" value="Clear"/>
+				<input type="submit" value="Register"/>
 			</form>
 			
-			<h2>Log in</h2><hr>
+			<h2>Log in</h2> <hr/>
 			<!-- Login form -->
 			<form>
-				Email:<br>
-				<input type="text" placeholder="username@example.com"> <br>
-				Password:<br>
-				<input type="text" placeholder="Password"> <br>
-				<input type="submit" value="Login">
+				<label>Email:</label> <br/>
+				<input type="email" placeholder="username@example.com" required> <br/>
+				<label>Password:</label> <br/>
+				<input type="password" required> <br/>
+				<input type="reset" value="Clear"/>
+				<input type="submit" value="Login"/>
 			</form>
 			
 		</div>
