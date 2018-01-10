@@ -31,6 +31,10 @@ nav {
 	float: right;
 }
 
+nav a {
+	padding-left: 10px;
+}
+
 nav a, footer a {
 	color: white;
 	font-family: courier;
