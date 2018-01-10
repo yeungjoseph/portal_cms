@@ -20,29 +20,44 @@ form {
 }
 
 table {
+	width: 90%;
+	height: 80%;
+	color: #494747;
 	margin: auto;
-	border: 1px solid black;
+	background-color: #dfdfdf;
 	padding: 5px;
+	font-family: Verdana;
 }
 
 th {
 	padding: 10px;
+	background-color: #D3D3D3;
 }
 
 td {
 	padding: 10px;
-	border: 1px solid black;
+	background-color: #D3D3D3;
 }
 
 caption {
 	font-size: 2.5em;
 	font-family: courier;
+	background-color: #dfdfdf;
+}
+
+button {
+	color: #494747;
 }
 
 td a:visited {
-	color: black;
+	color: #494747;
 }
 
 td a:hover {
 	color: gray;
+}
+
+.bigtext {
+	width: 300px;
+	height: 200px;
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Edit Page</title>
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<link rel="stylesheet" type="text/css" href="admin.css">
+	</head>
+	
+	<body>
+		<header>Edit Page</header>
+		<nav>
+			<a href="./dashboard.html">Home</a>  |
+			<a href="./editadmin.html">Edit Account</a>  |
+			<a href="./admin.html" id="login">Logout</a>	
+		</nav>
+		
+		<div class="content">
+			<form>
+			<!-- Title -->
+				<label>Title:</label> <br>
+				<input type="text" placeholder="Title of Page"> <br>
+			<!-- Content -->
+				<label>Content:</label> <br>
+				<input type="text" placeholder="User Content" class="bigtext"> <br>
+			<!-- Optional Content -->
+				<label>Optional content:</label> <br>
+				<input type="text" placeholder="Optional Content"> <br>
+			<!-- URL -->
+				<label>URL:</label> <br>
+				<input type="text" placeholder="URL of page"> <br>
+			<!-- Template -->
+				<label>Template:</label> <br>
+				<select name="template">
+					<option value="t1">Template 1</option>
+					<option value="t2">Template 2</option>
+					<option value="t3">Template 3</option>
+				</select> <br>
+			<!-- Save -->
+				<input type="submit" value="Save">
+			</form>
+		</div>
+		
+		<footer>
+			<p>Posted by: Author</p>
+			<p>Contact information: <a href="mailto:someone@example.com">
+			someone@example.com</a></p>
+		</footer>
+	</body>
+</html>
