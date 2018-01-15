@@ -36,6 +36,10 @@ th {
 	background-color: #D3D3D3;
 }
 
+tr td {
+	text-align: center;
+}
+
 td {
 	padding: 10px;
 	background-color: #D3D3D3;
@@ -64,6 +68,7 @@ label.prettylabel {
 	font-family: verdana;
 	font-weight: bold;
 	font-size: 12px;
+	color: white;
 }
 
 select {
@@ -71,7 +76,8 @@ select {
 }
 
 div#bg {
-	background-color: #e6f9ff;
+	//background-color: #e6f9ff;
+	background: linear-gradient(to bottom right, black , white);
 }
 
 .formbg {
