@@ -1,0 +1,88 @@
+h2 {
+	font-family: courier;
+}
+
+hr {
+	width: 40%;
+	margin: 0;
+}
+
+input[type="submit"], input[type="reset"] {
+	margin-top: 5px;
+	margin-right: 5px;
+	padding: 4px 6px;
+}
+
+input {
+	margin-bottom: 5px;
+}
+
+form {
+	padding-top: 10px;
+}
+
+table#dash{
+	width: 700px;
+	height: 80%;
+	color: #494747;
+	margin: auto;
+	background-color: #dfdfdf;
+	padding: 5px;
+	font-family: Verdana;
+}
+
+th {
+	padding: 10px;
+	background-color: #D3D3D3;
+}
+
+tr td {
+	text-align: center;
+}
+
+td {
+	padding: 10px;
+	background-color: #D3D3D3;
+}
+
+caption {
+	font-size: 2.5em;
+	font-family: courier;
+	background-color: #dfdfdf;
+}
+
+button {
+	color: #494747;
+	padding: 4px 6px;
+}
+
+td a:visited {
+	color: #494747;
+}
+
+td a:hover {
+	color: gray;
+}
+
+label.prettylabel {
+	font-family: verdana;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+select {
+	margin-bottom: 5px;
+	color: gray;
+}
+
+div.bg {
+	background: linear-gradient(to bottom right, black , white);
+}
+
+.content.bg {
+	color: white;
+}
+
+.formbg {
+	background-color: #ccd9ff;
+}
