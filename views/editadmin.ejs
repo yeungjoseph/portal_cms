@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>User Account</title>
-		<link rel="stylesheet" type="text/css" href="main.css"/>
-		<link rel="stylesheet" type="text/css" href="admin.css"/>
-	</head>
-	
+	<% include admin-header %>
 	<body>
 		<header>Edit User Account</header>
 		<nav>
-			<a href="dashboard">Dashboard</a>  |
-			<a href="admin" id="login">Logout</a>	
+			<a href="/admin">Dashboard</a>  |
+			<a href="/auth" id="login">Logout</a>	
 		</nav>
 		
 		<div class="content bg">
@@ -28,10 +23,6 @@
 			</form>
 		</div>
 		
-		<footer>
-			<p>Posted by: Author</p>
-			<p>Contact information: <a href="mailto:someone@example.com">
-			someone@example.com</a></p>
-		</footer>
+		<% include footer %>
 	</body>
 </html>

@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Admin Login</title>
-		<link rel="stylesheet" type="text/css" href="main.css"/>
-		<link rel="stylesheet" type="text/css" href="admin.css"/>
-	</head>
-	
+	<% include admin-header %>
 	<body>
 		<header>Admin Login Page</header>
 		<nav>
-			<a href="./template">Home</a>  |
+			<a href="/template">Home</a>  |
 			<a href="">Link 1</a>  |
 			<a href="">Link 2</a>  |
 			<a href="">Link 3</a>  |
 			<a href="">Link 4</a>  |
 			<a href="">Link 5</a>  |
-			<a href="./admin" id="login">Login</a>	
+			<a href="/auth" id="login">Login</a>	
 		</nav>
 		
 		<div class="content">
@@ -41,12 +36,7 @@
 				<input type="submit" value="Login"/>
 			</form>
 			
-		</div>
-		
-		<footer>
-			<p>Posted by: Author</p>
-			<p>Contact information: <a href="mailto:someone@example.com">
-			someone@example.com</a></p>
-		</footer>
+		</div>		
+		<% include footer %>
 	</body>
 </html>

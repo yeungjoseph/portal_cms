@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Edit Page</title>
-		<link rel="stylesheet" type="text/css" href="main.css"/>
-		<link rel="stylesheet" type="text/css" href="admin.css"/>
-	</head>
-	
+	<% include admin-header %>
 	<body>
 		<header>Edit Page</header>
 		<nav>
-			<a href="dashboard">Home</a>  |
-			<a href="editadmin">Edit Account</a>  |
-			<a href="admin" id="login">Logout</a>	
+			<a href="/admin">Home</a>  |
+			<a href="/admin/editadmin">Edit Account</a>  |
+			<a href="/auth" id="login">Logout</a>	
 		</nav>
 		
 		<div class="content bg">
@@ -40,11 +35,6 @@
 				<input type="submit" value="Save"/>
 			</form>
 		</div>
-		
-		<footer>
-			<p>Posted by: Author</p>
-			<p>Contact information: <a href="mailto:someone@example.com">
-			someone@example.com</a></p>
-		</footer>
+		<% include footer %>
 	</body>
 </html>
