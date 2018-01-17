@@ -2,12 +2,15 @@ var express = require('express');
 var mongoose = require('mongoose');
 var router = express.Router();
 
-// Create user schema andmodel
+// Create user schema and model
 var userSchema = mongoose.Schema({
+	name: String,
 	email: { type: String, required: true, unique: true },
 	password: { type: String, required: true}
 });
 var userModel = mongoose.model('users', userSchema);
+
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -27,6 +30,7 @@ router.get('/auth', function (req, res) {
 
 router.post('/auth/register', function(req, res) {
 	var newUser = new userModel({
+		name: req.body.name,
 		email: req.body.email,
 		password: req.body.password,
 	});
