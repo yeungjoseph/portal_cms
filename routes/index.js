@@ -4,8 +4,8 @@ var router = express.Router();
 
 // Create user schema andmodel
 var userSchema = mongoose.Schema({
-	email: String,
-	password: String
+	email: { type: String, required: true, unique: true },
+	password: { type: String, required: true}
 });
 var userModel = mongoose.model('users', userSchema);
 
@@ -25,10 +25,23 @@ router.get('/auth', function (req, res) {
 	res.render('admin', {});
 });
 
+router.post('/auth/register', function(req, res) {
+	var newUser = new userModel({
+		email: req.body.email,
+		password: req.body.password,
+	});
+	newUser.save(function(err, user) {
+		if (err) return console.log(err);
+		res.redirect('/admin');
+	});
+});
+
+/*
 router.get('/test', function(req, res) {
 	var newUser = new userModel({
 		email: 'abc@example.com',
-		password: 'abcdefg'
+		password: 'abcdefg',
+		extrafield: 'This is extra',
 	});
 	newUser.save(function(err, user) {
 		if (err) return console.error(err);
@@ -37,6 +50,7 @@ router.get('/test', function(req, res) {
 	// Sends empty response
 	res.end();
 });
+*/
 
 
 

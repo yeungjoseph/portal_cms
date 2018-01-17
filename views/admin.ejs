@@ -16,11 +16,11 @@
 		<div class="content">
 			<h2>Sign up</h2> <hr/>
 			<!-- Registration form -->
-			<form>
+			<form method="POST" action="/auth/register">
 				<label>Email:</label> <br/>
-				<input type="email" placeholder="username@example.com" required> <br/>
+				<input type="email" name="email" placeholder="username@example.com" required> <br/>
 				<label>Password:</label> <br/>
-				<input type="password" required /> <br/>
+				<input type="password" name="password" required /> <br/>
 				<input type="reset" value="Clear"/>
 				<input type="submit" value="Register"/>
 			</form>
@@ -29,9 +29,9 @@
 			<!-- Login form -->
 			<form>
 				<label>Email:</label> <br/>
-				<input type="email" placeholder="username@example.com" required> <br/>
+				<input type="email" name="email" placeholder="username@example.com" required> <br/>
 				<label>Password:</label> <br/>
-				<input type="password" required> <br/>
+				<input type="password" name="password" required> <br/>
 				<input type="reset" value="Clear"/>
 				<input type="submit" value="Login"/>
 			</form>
