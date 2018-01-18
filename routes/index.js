@@ -40,6 +40,25 @@ router.post('/auth/register', function(req, res) {
 	});
 });
 
+router.post('/auth/login', function(req, res) {
+	var email = req.body.email;
+	var password = req.body.password;
+	userModel.findOne({ email: email }, function (err, user) {
+		if (err) 
+		{
+			console.log('Error with findOne function!!!');
+		}
+		else
+		{
+			if (user != null && password === user.password)
+			 return res.redirect('/admin');
+		}
+		
+		return res.redirect('/auth');	
+	});
+	
+});
+
 /*
 router.get('/test', function(req, res) {
 	var newUser = new userModel({
