@@ -46,7 +46,7 @@ router.post('/auth/login', function(req, res) {
 	userModel.findOne({ email: email }, function (err, user) {
 		if (err) 
 		{
-			console.log('Error with findOne function!!!');
+			console.err(err);
 		}
 		else
 		{
