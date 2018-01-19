@@ -1,17 +1,6 @@
 var express = require('express');
-var mongoose = require('mongoose');
+var pageModel = require('../models/page');
 var router = express.Router();
-
-// Create page data schema and model
-var pageSchema = mongoose.Schema({
-	title: { type: String, required: true},
-	author: { type: String, required: true },
-	email: { type: String, required: true },
-	content: { type: String, required: true},
-	url: { type: String, required: true},
-	template: { type: String, required: true}
-});
-var pageModel = mongoose.model('pages', pageSchema);
 
 
 /* Set admin routes */

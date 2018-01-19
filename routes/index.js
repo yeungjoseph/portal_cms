@@ -1,15 +1,6 @@
 var express = require('express');
-var mongoose = require('mongoose');
+var userModel = require('../models/user');
 var router = express.Router();
-
-// Create user schema and model
-var userSchema = mongoose.Schema({
-	name: String,
-	email: { type: String, required: true, unique: true },
-	password: { type: String, required: true}
-});
-var userModel = mongoose.model('users', userSchema);
-
 
 
 /* GET home page. */
@@ -47,14 +38,22 @@ router.post('/auth/login', function(req, res) {
 		if (err) 
 		{
 			console.err(err);
+			return res.send(err);
+		}
+		else if (user == null)
+		{
+			//Show error message for email not existing
+			return res.render('auth', { errormsg: 'Email does not exist'});
+		}
+		else if (password != user.password)
+		{
+			//Show error message for wrong password
+			return res.render('auth', { errormsg: 'Wrong password'})
 		}
 		else
 		{
-			if (user != null && password === user.password)
-			 return res.redirect('/admin');
+			return res.redirect('/admin');
 		}
-		
-		return res.redirect('/auth');	
 	});
 	
 });

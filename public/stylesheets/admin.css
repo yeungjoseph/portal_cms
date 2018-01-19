@@ -83,3 +83,8 @@ div.bg {
 	color: white;
 }
 
+.auth-error {
+	color: red;
+	font-weight: bold;
+	font-family: verdana;
+}
