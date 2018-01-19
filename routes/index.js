@@ -25,7 +25,7 @@ router.get('/template', function (req, res) {
 });
 
 router.get('/auth', function (req, res) {
-	res.render('admin', {});
+	res.render('auth', {});
 });
 
 router.post('/auth/register', function(req, res) {

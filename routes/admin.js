@@ -16,7 +16,7 @@ var pageModel = mongoose.model('pages', pageSchema);
 
 /* Set admin routes */
 router.get('/', function (req, res) {
-	res.render('dashboard', {});
+	res.render('admin', {});
 });
 
 router.get('/editadmin', function (req, res) {

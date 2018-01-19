@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<% include admin-header %>
+	<body>
+		<header>Admin Login Page</header>
+		<nav>
+			<a href="/template">Home</a>  |
+			<a href="">Link 1</a>  |
+			<a href="">Link 2</a>  |
+			<a href="">Link 3</a>  |
+			<a href="">Link 4</a>  |
+			<a href="">Link 5</a>  |
+			<a href="/auth" id="login">Login</a>	
+		</nav>
+		
+		<div class="content">
+			<h2>Sign up</h2> <hr/>
+			<!-- Registration form -->
+			<form method="POST" action="/auth/register">
+				<label>Display Name:</label> <br/>
+				<input type="name" name="name" placeholder="Jane Doe" required> <br/>
+				<label>Email:</label> <br/>
+				<input type="email" name="email" placeholder="username@example.com" required> <br/>
+				<label>Password:</label> <br/>
+				<input type="password" name="password" required /> <br/>
+				<input type="reset" value="Clear"/>
+				<input type="submit" value="Register"/>
+			</form>
+			
+			<h2>Log in</h2> <hr/>
+			<!-- Login form -->
+			<form method="POST" action="/auth/login">
+				<label>Email:</label> <br/>
+				<input type="email" name="email" placeholder="username@example.com" required> <br/>
+				<label>Password:</label> <br/>
+				<input type="password" name="password" required> <br/>
+				<input type="reset" value="Clear"/>
+				<input type="submit" value="Login"/>
+			</form>
+			
+		</div>		
+		<% include footer %>
+	</body>
+</html>
