@@ -27,6 +27,7 @@ router.post('/auth/register', function(req, res) {
 	});
 	newUser.save(function(err, user) {
 		if (err) return console.log(err);
+		req.session.user = user;
 		res.redirect('/admin');
 	});
 });
@@ -48,32 +49,14 @@ router.post('/auth/login', function(req, res) {
 		else if (password != user.password)
 		{
 			//Show error message for wrong password
-			return res.render('auth', { errormsg: 'Wrong password'})
+			return res.render('auth', { errormsg: 'Password is incorrect'})
 		}
 		else
 		{
+			req.session.user = user;
 			return res.redirect('/admin');
 		}
-	});
-	
+	});	
 });
-
-/*
-router.get('/test', function(req, res) {
-	var newUser = new userModel({
-		email: 'abc@example.com',
-		password: 'abcdefg',
-		extrafield: 'This is extra',
-	});
-	newUser.save(function(err, user) {
-		if (err) return console.error(err);
-		console.log(user);
-	});
-	// Sends empty response
-	res.end();
-});
-*/
-
-
 
 module.exports = router;

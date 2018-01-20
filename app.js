@@ -5,11 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var User = require('./models/user');
 
 var index = require('./routes/index');
 var admin = require('./routes/admin');
 
 var app = express();
+var session = require('client-sessions');
 
 // setup mongo database
 mongoose.connect('mongodb://localhost/portalCMS');
@@ -30,6 +32,28 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// Session handling
+app.use(session({
+  cookieName: 'session',
+  secret: 'xqKBPWdJvjbC9zRi3m6T',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}));
+app.use(function(req, res, next) {
+  if (req.session && req.session.user) {
+    User.findOne({ email: req.session.user.email }, function(err, user) {
+      if (user) {
+        req.user = user;
+        delete req.user.password;
+        req.session.user = user;
+        //req.locals.user = user;
+      }
+      next();
+    });
+  } else {
+    next();
+  }
+});
 
 app.use('/', index);
 app.use('/admin', admin);
