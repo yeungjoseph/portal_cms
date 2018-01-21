@@ -1,5 +1,6 @@
 var express = require('express');
 var userModel = require('../models/user');
+var pagesModel = require('../models/page');
 var router = express.Router();
 
 
@@ -11,7 +12,7 @@ router.get('/', function(req, res, next) {
 router.get('/template', function (req, res) {
 	res.render('template',{
 		title: "Template Title",
-		content: "Template content here."
+		content: "Welcome to the homepage."
 	});
 });
 
@@ -57,6 +58,20 @@ router.post('/auth/login', function(req, res) {
 			return res.redirect('/admin');
 		}
 	});	
+});
+
+router.get('/:page', function(req, res) {
+	pagesModel.findOne({ url: req.params.page.trim() },
+	function(err, page) {
+		if(err) return res.send(err);
+		if (page) {
+			res.render('template', {
+				title: page.title,
+				content: page.content,
+			});
+		}
+		else {res.status(404).send('404 - Not found');}
+	});
 });
 
 module.exports = router;

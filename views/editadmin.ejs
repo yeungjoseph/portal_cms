@@ -13,13 +13,13 @@
 			<!-- Edit User Credential form -->
 			<form>
 				<label>Display Name:</label> <br/>
-				<input type="name" name="name" placeholder="Jane Doe" required> <br/>
+				<input type="text" name="name" value=<%= user.name %> required> <br/>
 				New Email:<br/>
-				<input type="text" placeholder="username@example.com"/> <br/>
+				<input type="text" name="email" value=<%= user.email %>> <br/>
 				New Password:<br/>
-				<input type="password"/> <br/>
+				<input type="password" name="password1"/> <br/>
 				Retype Password:<br/>
-				<input type="password"/> <br/>
+				<input type="password" name="password2"/> <br/>
 				<input type="reset" value="Clear"/>
 				<input type="submit" value="Save"/>
 			</form>

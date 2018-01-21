@@ -1,4 +1,5 @@
 var express = require('express');
+var userModel = require('../models/user');
 var pageModel = require('../models/page');
 var router = express.Router();
 
@@ -13,11 +14,15 @@ function requireLogin (req, res, next) {
 
 /* Set admin routes */
 router.get('/', requireLogin, function (req, res) {
-	res.render('admin', {});
+	var email = req.session.user.email;
+	pageModel.find({ email: email }, function (err, pages){
+		if (err) return res.send(err);
+		res.render('admin', { pages: pages });
+	});
 });
 
 router.get('/editadmin', requireLogin, function (req, res) {
-	res.render('editadmin', {});
+	res.render('editadmin', { user: req.session.user });
 });
 
 router.get('/addpage', requireLogin, function (req, res) {
@@ -27,8 +32,8 @@ router.get('/addpage', requireLogin, function (req, res) {
 router.post('/addpage/send', requireLogin, function (req, res) {
 	var newPage = new pageModel({
 		title: req.body.title,
-		author: req.body.author,
-		email: req.body.email,
+		author: req.session.user.name,
+		email: req.session.user.email,
 		content: req.body.content,
 		url: req.body.URL,
 		template: req.body.template,
