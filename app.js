@@ -32,9 +32,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 // Session handling
 app.use(session({
-  cookieName: 'session',
+  cookieName: 'session', // Names the request object req.session
   secret: 'xqKBPWdJvjbC9zRi3m6T',
   duration: 30 * 60 * 1000,
   activeDuration: 5 * 60 * 1000,
@@ -43,10 +44,10 @@ app.use(function(req, res, next) {
   if (req.session && req.session.user) {
     User.findOne({ email: req.session.user.email }, function(err, user) {
       if (user) {
-        req.user = user;
+        req.user = user.toObject(); // Convert from mongoose object to JS
         delete req.user.password;
-        req.session.user = user;
-        //req.locals.user = user;
+        req.session.user = user; // Refreshes the cookie header
+        res.locals.user = user; // Local to views
       }
       next();
     });
@@ -54,6 +55,15 @@ app.use(function(req, res, next) {
     next();
   }
 });
+
+/* Define require login function */
+function requireLogin (req, res, next) {
+	if (!req.user) {
+	  res.redirect('/auth');
+	} else {
+	  next();
+	}
+};
 
 app.use('/admin', admin);
 app.use('/', index);

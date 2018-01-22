@@ -54,13 +54,13 @@ router.post('/auth/login', function(req, res) {
 		}
 		else
 		{
-			req.session.user = user;
+			req.session.user = user; // Sets the response header to add a cookie
 			return res.redirect('/admin');
 		}
 	});	
 });
 
-router.get('/:page', function(req, res) {
+router.get('/:page', function(req, res, next) {
 	pagesModel.findOne({ url: req.params.page.trim() },
 	function(err, page) {
 		if(err) return res.send(err);
@@ -70,7 +70,9 @@ router.get('/:page', function(req, res) {
 				content: page.content,
 			});
 		}
-		else {res.status(404).send('404 - Not found');}
+		else {
+			next(); // Chhange to enxt
+		} 
 	});
 });
 
