@@ -65,9 +65,7 @@ router.post('/addpage/send', function (req, res) {
 		}
 		// Display message to user if the URL is taken
 		if (page)
-		{
 			return res.render('addpage', { urlErr: 'That URL has been taken!'});
-		}
 		// Create a new account
 		else
 		{
@@ -105,15 +103,32 @@ router.get('/edit/:url', function(req, res) {
 	});
 })
 
-// Edit a page
+// Save edits to a page
 router.post('/edit/:url', function(req, res) {
 	pageModel.findOne({ url: req.params.url.trim() },
 	function(err, page) {
 		if(err) return res.send(err);
 		// Check if page exists and if the user is the author before editting
 		if (page && req.user._id.toString() == page.author._id.toString()) {
-			// Set page values
-			// Save page with callback
+			// Check for duplicate URL
+			pageModel.findOne({ url: req.body.URL }, function (err, dup) {
+				if(err) return res.send(err);
+				// Check that this URL does not exist in the current database or
+				// if it does, it belongs to the current page.
+				if (!dup || (dup && dup.url === req.params.url)) {
+					// Set page values
+					page.title = req.body.title;
+					page.content = req.body.content;
+					page.url = req.body.URL;
+					// Save page 
+					page.save(function (err, updatedPage) {
+						if (err) return res.send(err);
+						res.render('editpage', { page: page, urlErr: 'Successfully updated!' });
+					});
+				}
+				else 
+					return res.render('editpage', { page: page, urlErr: 'That URL has been taken!'});
+			});
 		}
 		else {
 			res.redirect('/admin');
