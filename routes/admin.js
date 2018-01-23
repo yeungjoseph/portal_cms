@@ -8,9 +8,9 @@ router.use(auth.requireLogin);
 
 /* Set admin routes */
 router.get('/', function (req, res) {
-	var email = req.user.email;
-	pageModel.find({ email: email }, function (err, pages){
+	pageModel.find({ "author._id": req.user._id }, function (err, pages) {
 		if (err) return res.send(err);
+		console.log(pages);
 		res.render('admin', { pages: pages });
 	});
 });
@@ -26,8 +26,11 @@ router.get('/addpage', function (req, res) {
 router.post('/addpage/send', function (req, res) {
 	var newPage = new pageModel({
 		title: req.body.title,
-		author: req.user.name,
-		email: req.user.email,
+		author: {
+			email: req.user.email,
+			name: req.user.name,
+			_id: req.user._id,
+		},
 		content: req.body.content,
 		url: req.body.URL,
 		template: req.body.template,
