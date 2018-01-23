@@ -15,6 +15,9 @@
 		
 		<div class="content">
 			<h2>Sign up</h2> <hr/>
+			<% if(typeof regErr !== 'undefined') { %>
+			<h4 class="auth-error"><%= regErr %></h4>
+			<% } %>
 			<!-- Registration form -->
 			<form method="POST" action="/auth/register">
 				<label>Display Name:</label> <br/>
@@ -28,8 +31,8 @@
 			</form>
 			
 			<h2>Log in</h2> <hr/>
-			<% if(typeof errormsg !== 'undefined') { %>
-			<h4 class="auth-error"><%= errormsg %></h4>
+			<% if(typeof loginErr !== 'undefined') { %>
+			<h4 class="auth-error"><%= loginErr %></h4>
 			<% } %>
 			<!-- Login form -->
 			<form method="POST" action="/auth/login">
