@@ -2,7 +2,7 @@
 <html>
 	<% include admin-header %>
 	<body>
-		<header>Edit Page</header>
+		<header>Add a Page</header>
 		<nav>
 			<a href="/admin">Home</a>  |
 			<a href="/admin/editadmin">Edit Account</a>  |
@@ -13,16 +13,16 @@
 			<% if(typeof urlErr !== 'undefined') { %>
 			<h4 class="auth-error"><%= urlErr %></h4>
 			<% } %>
-			<form method="POST" action="/admin/edit/<%= page.url %>">
+			<form method="POST" action="/admin/addpage/send">
 			<!-- Title -->
 				<label class="prettylabel">Title:</label> <br/>
-				<input type="text" name="title" value="<%= page.title %>" required/> <br/>
+				<input type="text" name="title" placeholder="Title of Page" required/> <br/>
 			<!-- Content -->
 				<label class="prettylabel">Content:</label> <br/>
-				<textarea name="content" rows="10" cols="50"><%= page.content %></textarea> <br/>
+				<textarea name="content" rows="10" cols="50"></textarea> <br/>
 			<!-- URL -->
 				<label class="prettylabel">URL:</label> <br/>
-				<input type="text" name="URL" value="<%= page.url %>" /> <br/>
+				<input type="text" name="URL" placeholder="URL of page"/> <br/>
 			<!-- Template -->
 				<label class="prettylabel">Template:</label> <br/>
 				<select name="template" required>

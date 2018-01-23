@@ -25,10 +25,10 @@
 								<%= pages[i].title %></a></td>
 							<td>January 7, 2018</td>
 							<td>
-								<form class='within' action='/admin/delete/<%= pages[i].url %>' method='post'>
+								<form class='within' action='/admin/delete/<%= pages[i].url %>' method='POST'>
 									<button type='submit'>Delete</button>
 								</form>
-								<form class='within' action='' method='post'>
+								<form class='within' action='/admin/edit/<%= pages[i].url %>' method='GET'>
 									<button type='submit'>Edit</button>
 								</form>
 								<form class='within' action='' method='post'>

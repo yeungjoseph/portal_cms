@@ -32,7 +32,7 @@ router.post('/editadmin', function (req, res) {
 			{
 				// Find the model and update it
 				userModel.findByIdAndUpdate( { _id: req.user._id }, 
-					{ $set: { name: req.body.name, email: req.body.email, password: req.body.password1, _id: req.user._id }}, 
+					{ $set: { name: req.body.name, email: req.body.email, password: req.body.password1 }}, 
 					function(err, user) { if (err) return res.send(err); }
 				);
 			}
@@ -53,7 +53,7 @@ router.post('/editadmin', function (req, res) {
 });
 
 router.get('/addpage', function (req, res) {
-	res.render('editpage', {});
+	res.render('addpage', {});
 });
 
 router.post('/addpage/send', function (req, res) {
@@ -66,7 +66,7 @@ router.post('/addpage/send', function (req, res) {
 		// Display message to user if the URL is taken
 		if (page)
 		{
-			return res.render('editpage', { urlErr: 'That URL has been taken!'});
+			return res.render('addpage', { urlErr: 'That URL has been taken!'});
 		}
 		// Create a new account
 		else
@@ -90,9 +90,39 @@ router.post('/addpage/send', function (req, res) {
 	});
 });
 
-// Delete a dynamic page
+// Load a page for editting
+router.get('/edit/:url', function(req, res) {
+	pageModel.findOne({ url: req.params.url.trim() },
+	function(err, page) {
+		if(err) return res.send(err);
+		// Check if page exists and if the user is the author before editting
+		if (page && req.user._id.toString() == page.author._id.toString()) {
+			res.render('editpage', { page: page });
+		}
+		else {
+			res.redirect('/admin');
+		}
+	});
+})
+
+// Edit a page
+router.post('/edit/:url', function(req, res) {
+	pageModel.findOne({ url: req.params.url.trim() },
+	function(err, page) {
+		if(err) return res.send(err);
+		// Check if page exists and if the user is the author before editting
+		if (page && req.user._id.toString() == page.author._id.toString()) {
+			// Set page values
+			// Save page with callback
+		}
+		else {
+			res.redirect('/admin');
+		}
+	});
+})
+
+// Delete a page
 router.post('/delete/:url', function(req, res) {
-	// Change to findOneAndRemove if time permits
 	pageModel.findOne({ url: req.params.url.trim() },
 	function(err, page) {
 		if(err) return res.send(err);
