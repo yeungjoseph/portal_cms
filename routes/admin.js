@@ -15,7 +15,41 @@ router.get('/', function (req, res) {
 });
 
 router.get('/editadmin', function (req, res) {
-	res.render('editadmin', {});
+	res.render('editadmin');
+});
+
+router.post('/editadmin', function (req, res) {
+	// Status message
+	var edit = '';
+
+	userModel.findOne( { email: req.body.email }, function (err, editor) {
+		if (err) res.send(err);
+		// Check that the email is not duplicated 
+		if (!editor || (editor && editor.email === req.user.email))
+		{
+			// Check the two passwords are equal 
+			if (req.body.password1 === req.body.password2)
+			{
+				// Find the model and update it
+				userModel.findByIdAndUpdate( { _id: req.user._id }, 
+					{ $set: { name: req.body.name, email: req.body.email, password: req.body.password1, _id: req.user._id }}, 
+					function(err, user) { if (err) return res.send(err); }
+				);
+			}
+			else
+			{
+				edit = 'The passwords did not match';
+			}
+		}
+		else
+		{
+			edit = 'Email is already taken!';
+		}
+
+		// Update and display status message
+		edit = edit === '' ? 'Successfully updated account info!' : edit;
+		res.render('editadmin', { editMsg: edit });
+	});	
 });
 
 router.get('/addpage', function (req, res) {
@@ -58,6 +92,7 @@ router.post('/addpage/send', function (req, res) {
 
 // Delete a dynamic page
 router.post('/delete/:url', function(req, res) {
+	// Change to findOneAndRemove if time permits
 	pageModel.findOne({ url: req.params.url.trim() },
 	function(err, page) {
 		if(err) return res.send(err);

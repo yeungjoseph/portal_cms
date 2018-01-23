@@ -9,17 +9,20 @@
 		</nav>
 		
 		<div class="content bg">
+			<% if(typeof editMsg !== 'undefined') { %>
+			<h4 class="auth-error"><%= editMsg %></h4>
+			<% } %>
 			<h2>Edit Account Info</h2><hr/>
 			<!-- Edit User Credential form -->
-			<form>
+			<form method="POST">
 				<label>Display Name:</label> <br/>
-				<input type="text" name="name" value=<%= user.name %> required> <br/>
+				<input type="text" name="name" value=<%= user.name %> required /> <br/>
 				New Email:<br/>
-				<input type="text" name="email" value=<%= user.email %>> <br/>
+				<input type="text" name="email" value=<%= user.email %> required /> <br/>
 				New Password:<br/>
-				<input type="password" name="password1"/> <br/>
+				<input type="password" name="password1" required /> <br/>
 				Retype Password:<br/>
-				<input type="password" name="password2"/> <br/>
+				<input type="password" name="password2" required /> <br/>
 				<input type="reset" value="Clear"/>
 				<input type="submit" value="Save"/>
 			</form>
