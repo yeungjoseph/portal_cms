@@ -88,3 +88,7 @@ div.bg {
 	font-weight: bold;
 	font-family: verdana;
 }
+
+.within {
+	display: inline;
+}

@@ -1,6 +1,6 @@
 var express = require('express');
 var userModel = require('../models/user');
-var pagesModel = require('../models/page');
+var pageModel = require('../models/page');
 var router = express.Router();
 
 
@@ -78,7 +78,7 @@ router.post('/auth/login', function(req, res) {
 });
 
 router.get('/:page', function(req, res, next) {
-	pagesModel.findOne({ url: req.params.page.trim() },
+	pageModel.findOne({ url: req.params.page.trim() },
 	function(err, page) {
 		if(err) return res.send(err);
 		if (page) {
@@ -88,7 +88,7 @@ router.get('/:page', function(req, res, next) {
 			});
 		}
 		else {
-			next(); // Chhange to enxt
+			next();
 		} 
 	});
 });

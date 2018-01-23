@@ -56,6 +56,21 @@ router.post('/addpage/send', function (req, res) {
 	});
 });
 
+// Delete a dynamic page
+router.post('/delete/:url', function(req, res) {
+	pageModel.findOne({ url: req.params.url.trim() },
+	function(err, page) {
+		if(err) return res.send(err);
+		// Check if page exists and if the user is the author before deleting
+		if (page && req.user._id.toString() == page.author._id.toString()) {
+			pageModel.remove({ url: req.params.url.trim()}, function(err){
+				if (err) return res.send(err);
+			});
+		}
+		res.redirect('/admin');
+	});
+})
+
 router.get('/logout', function (req, res) {
 	req.session.reset();
 	res.redirect('/auth');
