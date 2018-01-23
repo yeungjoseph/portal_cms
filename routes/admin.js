@@ -79,6 +79,7 @@ router.post('/addpage/send', function (req, res) {
 				content: req.body.content,
 				url: req.body.URL,
 				template: req.body.template,
+				visible: true,
 			});
 			newPage.save(function(err, user){
 				if (err) return console.log(err);
@@ -101,7 +102,7 @@ router.get('/edit/:url', function(req, res) {
 			res.redirect('/admin');
 		}
 	});
-})
+});
 
 // Save edits to a page
 router.post('/edit/:url', function(req, res) {
@@ -127,14 +128,31 @@ router.post('/edit/:url', function(req, res) {
 					});
 				}
 				else 
-					return res.render('editpage', { page: page, urlErr: 'That URL has been taken!'});
+					res.render('editpage', { page: page, urlErr: 'That URL has been taken!'});
 			});
 		}
 		else {
 			res.redirect('/admin');
 		}
 	});
-})
+});
+
+// Toggle visibility of a page
+router.post('/visible/:url', function(req, res) {
+	pageModel.findOne({ url: req.params.url.trim() }, function(err, page) {
+		if (err) return res.send(err);
+		// Check if page exists and if the user is the author before toggling visibility
+		if (page && req.user._id.toString() == page.author._id.toString()) {
+			// Switch the visibility setting
+			page.visible = page.visible ? false : true;
+			page.save( function(err) {
+				if (err) return res.send(err);
+				//return res.render('admin', { visibleUpdate: "Updated the visibility of your page!" });
+			});
+		}
+	});
+	res.redirect('/admin');
+});
 
 // Delete a page
 router.post('/delete/:url', function(req, res) {
@@ -149,7 +167,7 @@ router.post('/delete/:url', function(req, res) {
 		}
 		res.redirect('/admin');
 	});
-})
+});
 
 router.get('/logout', function (req, res) {
 	req.session.reset();

@@ -31,9 +31,16 @@
 								<form class='within' action='/admin/edit/<%= pages[i].url %>' method='GET'>
 									<button type='submit'>Edit</button>
 								</form>
-								<form class='within' action='' method='post'>
-									<button type='submit'>Visible</button>
+								<!-- Condense this eventually -->
+								<% if (pages[i].visible) { %>
+								<form class='within' action='/admin/visible/<%= pages[i].url %>' method='POST'>
+									<button class='visible' type='submit'>Visible</button>
 								</form>
+								<% } else { %>
+								<form class='within' action='/admin/visible/<%= pages[i].url %>' method='POST'>
+									<button class='invisible' type='submit'>Visible</button>
+								</form>
+								<% } %>
 							</td>
 						</tr>
 					<% } %>

@@ -92,3 +92,13 @@ div.bg {
 .within {
 	display: inline;
 }
+
+.visible {
+	background-color: green;
+	color: white;
+}
+
+.invisible {
+	background-color: red;
+	color: white;
+}

@@ -81,7 +81,7 @@ router.get('/:page', function(req, res, next) {
 	pageModel.findOne({ url: req.params.page.trim() },
 	function(err, page) {
 		if(err) return res.send(err);
-		if (page) {
+		if (page && page.visible) {
 			res.render('template', {
 				title: page.title,
 				content: page.content,
