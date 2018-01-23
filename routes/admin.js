@@ -10,7 +10,6 @@ router.use(auth.requireLogin);
 router.get('/', function (req, res) {
 	pageModel.find({ "author._id": req.user._id }, function (err, pages) {
 		if (err) return res.send(err);
-		console.log(pages);
 		res.render('admin', { pages: pages });
 	});
 });
@@ -24,20 +23,36 @@ router.get('/addpage', function (req, res) {
 });
 
 router.post('/addpage/send', function (req, res) {
-	var newPage = new pageModel({
-		title: req.body.title,
-		author: {
-			email: req.user.email,
-			name: req.user.name,
-			_id: req.user._id,
-		},
-		content: req.body.content,
-		url: req.body.URL,
-		template: req.body.template,
-	});
-	newPage.save(function(err, user){
-		if (err) return console.log(err);
-		res.redirect('/admin');
+	pageModel.findOne({ url: req.body.URL }, function (err, page) {
+		if (err)
+		{
+			console.error(err);
+			return res.send(err);
+		}
+		// Display message to user if the URL is taken
+		if (page)
+		{
+			return res.render('editpage', { urlErr: 'That URL has been taken!'});
+		}
+		// Create a new account
+		else
+		{
+			var newPage = new pageModel({
+				title: req.body.title,
+				author: {
+					email: req.user.email,
+					name: req.user.name,
+					_id: req.user._id,
+				},
+				content: req.body.content,
+				url: req.body.URL,
+				template: req.body.template,
+			});
+			newPage.save(function(err, user){
+				if (err) return console.log(err);
+				res.redirect('/admin');
+			});
+		}
 	});
 });
 
