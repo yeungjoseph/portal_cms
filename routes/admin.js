@@ -53,7 +53,7 @@ router.post('/editadmin', function (req, res) {
 });
 
 router.get('/addpage', function (req, res) {
-	res.render('addpage', {});
+	res.render('addpage');
 });
 
 router.post('/addpage', function (req, res) {
@@ -87,13 +87,13 @@ router.post('/addpage', function (req, res) {
 
 // Load a page for editting
 router.get('/edit/:id', function(req, res) {
-	pageModel.findById(req.params.id.trim(), function(err, page) {
+	pageModel.findOne({ _id: req.params.id.trim(), 'author._id': req.user._id }, 
+	function(err, page) {
 		if (err) return res.send(err);
-		// Check if page exists and if the user is the author before editting
-		if (page && req.user._id.toString() == page.author._id.toString())
-			res.render('editpage', { page: page });
-		else 
-			res.redirect('/admin');
+		if (!page)
+			return res.redirect('/auth');
+		else
+			return res.render('editpage', { page: page });
 	});
 });
 
@@ -124,38 +124,41 @@ router.post('/edit/:id', function(req, res) {
 			});
 		}
 		else 
-			res.redirect('/admin');
+			res.redirect('/auth');
 	});
 });
 
 // Toggle visibility of a page
 router.post('/visible/:id', function(req, res) {
-	pageModel.findById(req.params.id.trim(), function(err, page) {
+	pageModel.findOne({ _id: req.params.id.trim(), 'author._id': req.user._id },
+	 function(err, page) {
 		if (err) return res.send(err);
-		// Check if page exists and if the user is the author before toggling visibility
-		if (page && req.user._id.toString() == page.author._id.toString()) {
+		if (!page) 
+			return res.redirect('/auth');
+		else {
 			// Switch the visibility setting
 			page.visible = page.visible ? false : true;
 			page.save( function(err) {
 				if (err) return res.send(err);
-				//return res.render('admin', { visibleUpdate: "Updated the visibility of your page!" });
+				return res.redirect('/admin');
 			});
 		}
 	});
-	res.redirect('/admin');
 });
 
 // Delete a page
 router.post('/delete/:id', function(req, res) {
-	pageModel.findById(req.params.id.trim(), function(err, page) {
+	pageModel.findOne({ _id: req.params.id.trim(), 'author._id': req.user._id }, 
+	function(err, page) {
 		if (err) return res.send(err);
-		// Check if page exists and if the user is the author before deleting
-		if (page && req.user._id.toString() == page.author._id.toString()) {
+		if (!page)
+			res.redirect('/auth');
+		else {
 			pageModel.remove({ _id: req.params.id.trim()}, function(err){
 				if (err) return res.send(err);
+				res.redirect('/admin');
 			});
 		}
-		res.redirect('/admin');
 	});
 });
 
