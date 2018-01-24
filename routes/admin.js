@@ -15,41 +15,33 @@ router.get('/', function (req, res) {
 });
 
 router.get('/editadmin', function (req, res) {
-	res.render('editadmin');
+	res.render('editadmin', { person: req.user });
 });
 
 router.post('/editadmin', function (req, res) {
-	// Status message
-	var edit = '';
-
-	userModel.findByIdAndUpdate(req.user._id, function (err, editor) {
-		if (err) res.send(err);
-		// Check that the email is not duplicated 
-		if (!editor || (editor && editor.email === req.user.email))
-		{
-			// Check the two passwords are equal 
-			if (req.body.password1 === req.body.password2)
-			{
-				// Find the model and update it
-				userModel.findByIdAndUpdate(req.user._id, 
-					{ $set: { name: req.body.name, email: req.body.email, password: req.body.password1 }}, 
-					function(err, user) { if (err) return res.send(err); }
-				);
-			}
-			else
-			{
-				edit = 'The passwords did not match';
-			}
-		}
-		else
-		{
-			edit = 'Email is already taken!';
-		}
-
-		// Update and display status message
-		edit = edit === '' ? 'Successfully updated account info!' : edit;
-		res.render('editadmin', { editMsg: edit });
-	});	
+	if (req.body.password1 === req.body.password2)
+	{
+		userModel.findByIdAndUpdate(req.user._id, {$set: { 
+			name: req.body.name, 
+			email: req.body.email,
+			password: req.body.password1
+		}}, { new: true }, function(err, newUser) {
+				if (err) {
+					if (err.code === 11000)
+						return res.render('editadmin', {
+							editMsg: 'That email has already been taken!',
+							person: req.user });
+					return res.send(err);
+				}
+				else
+					return res.render('editadmin', {
+						editMsg: 'Successfully updated account info!',
+						person: newUser
+				});
+		});
+	}
+	else 
+		res.render('editadmin', { editMsg: 'The passwords did not match', person: req.user });
 });
 
 router.get('/addpage', function (req, res) {
