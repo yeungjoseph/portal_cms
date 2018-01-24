@@ -6,12 +6,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-router.get('/template', function (req, res) {
-	res.render('template',{
-		title: "Template Title",
+  res.render('template', { 
+		title: 'Home',
 		content: "Welcome to the homepage."
 	});
 });

@@ -90,10 +90,9 @@ router.post('/addpage/send', function (req, res) {
 });
 
 // Load a page for editting
-router.get('/edit/:url', function(req, res) {
-	pageModel.findOne({ url: req.params.url.trim() },
-	function(err, page) {
-		if(err) return res.send(err);
+router.get('/edit/:id', function(req, res) {
+	pageModel.findById(req.params.id.trim(), function(err, page) {
+		if (err) return res.send(err);
 		// Check if page exists and if the user is the author before editting
 		if (page && req.user._id.toString() == page.author._id.toString()) {
 			res.render('editpage', { page: page });
@@ -105,15 +104,14 @@ router.get('/edit/:url', function(req, res) {
 });
 
 // Save edits to a page
-router.post('/edit/:url', function(req, res) {
-	pageModel.findOne({ url: req.params.url.trim() },
-	function(err, page) {
-		if(err) return res.send(err);
+router.post('/edit/:id', function(req, res) {
+	pageModel.findById(req.params.id.trim(), function(err, page) {
+		if (err) return res.send(err);
 		// Check if page exists and if the user is the author before editting
 		if (page && req.user._id.toString() == page.author._id.toString()) {
 			// Check for duplicate URL
-			pageModel.findOne({ url: req.body.URL }, function (err, dup) {
-				if(err) return res.send(err);
+			pageModel.findOne({ _id: req.body.iid }, function (err, dup) {
+				if (err) return res.send(err);
 				// Check that this URL does not exist in the current database or
 				// if it does, it belongs to the current page.
 				if (!dup || (dup && dup.url === req.params.url)) {
@@ -138,8 +136,8 @@ router.post('/edit/:url', function(req, res) {
 });
 
 // Toggle visibility of a page
-router.post('/visible/:url', function(req, res) {
-	pageModel.findOne({ url: req.params.url.trim() }, function(err, page) {
+router.post('/visible/:id', function(req, res) {
+	pageModel.findById(req.params.id.trim(), function(err, page) {
 		if (err) return res.send(err);
 		// Check if page exists and if the user is the author before toggling visibility
 		if (page && req.user._id.toString() == page.author._id.toString()) {
@@ -155,13 +153,12 @@ router.post('/visible/:url', function(req, res) {
 });
 
 // Delete a page
-router.post('/delete/:url', function(req, res) {
-	pageModel.findOne({ url: req.params.url.trim() },
-	function(err, page) {
-		if(err) return res.send(err);
+router.post('/delete/:id', function(req, res) {
+	pageModel.findById(req.params.id.trim(), function(err, page) {
+		if (err) return res.send(err);
 		// Check if page exists and if the user is the author before deleting
 		if (page && req.user._id.toString() == page.author._id.toString()) {
-			pageModel.remove({ url: req.params.url.trim()}, function(err){
+			pageModel.remove({ _id: req.params.id.trim()}, function(err){
 				if (err) return res.send(err);
 			});
 		}

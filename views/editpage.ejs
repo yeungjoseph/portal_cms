@@ -13,7 +13,7 @@
 			<% if(typeof urlErr !== 'undefined') { %>
 			<h4 class="auth-error"><%= urlErr %></h4>
 			<% } %>
-			<form method="POST" action="/admin/edit/<%= page.url %>">
+			<form method="POST" action="/admin/edit/<%= page._id %>">
 			<!-- Title -->
 				<label class="prettylabel">Title:</label> <br/>
 				<input type="text" name="title" value="<%= page.title %>" required/> <br/>
