@@ -22,7 +22,7 @@ router.post('/editadmin', function (req, res) {
 	// Status message
 	var edit = '';
 
-	userModel.findOne( { email: req.body.email }, function (err, editor) {
+	userModel.findByIdAndUpdate(req.user._id, function (err, editor) {
 		if (err) res.send(err);
 		// Check that the email is not duplicated 
 		if (!editor || (editor && editor.email === req.user.email))
@@ -99,32 +99,26 @@ router.get('/edit/:id', function(req, res) {
 
 // Save edits to a page
 router.post('/edit/:id', function(req, res) {
-	pageModel.findById(req.params.id.trim(), function(err, page) {
-		if (err) return res.send(err);
-		// Check if page exists and if the user is the author before editting
-		if (page && req.user._id.toString() == page.author._id.toString()) {
-			// Check for duplicate URL
-			pageModel.findOne({ url: req.body.URL }, function (err, dup) {
-				if (err) return res.send(err);
-				// Check that this URL does not exist in the current database or
-				// if it does, it belongs to the current page.
-				if (!dup || (dup && dup.url === req.body.URL)) {
-					// Set page values
-					page.title = req.body.title;
-					page.content = req.body.content;
-					page.url = req.body.URL;
-					// Save page 
-					page.save(function (err, updatedPage) {
-						if (err) return res.send(err);
-						res.render('editpage', { page: page, urlErr: 'Successfully updated!' });
-					});
-				}
-				else 
-					res.render('editpage', { page: page, urlErr: 'That URL has been taken!'});
-			});
+	pageModel.findOneAndUpdate({ _id: req.params.id.trim(), 'author._id': req.user._id},
+	{$set:{ title: req.body.title, content: req.body.content, url: req.body.URL }},
+	{ new: true }, function(err, updatedPage) {
+		if (err) {
+			if (err.code === 11000) {
+				console.log('duplicate url');
+				return res.render('editpage', { page: {
+					_id: req.params.id.trim(),
+					title: req.body.title,
+					author: req.body.author,
+					content: req.body.content,
+					url: req.body.URL,
+					template: req.body.template,
+					visible: true
+				}, 
+				urlErr: 'That URL has been taken!'});
+			}
 		}
-		else 
-			res.redirect('/auth');
+		else
+			res.render('editpage', { page: updatedPage, urlErr: 'Successfully updated!' });
 	});
 });
 
@@ -148,17 +142,10 @@ router.post('/visible/:id', function(req, res) {
 
 // Delete a page
 router.post('/delete/:id', function(req, res) {
-	pageModel.findOne({ _id: req.params.id.trim(), 'author._id': req.user._id }, 
-	function(err, page) {
-		if (err) return res.send(err);
-		if (!page)
-			res.redirect('/auth');
-		else {
-			pageModel.remove({ _id: req.params.id.trim()}, function(err){
-				if (err) return res.send(err);
-				res.redirect('/admin');
-			});
-		}
+	pageModel.remove({ _id: req.params.id.trim(), 'author._id': req.user._id },
+		function(err) {
+			if (err) return res.send(err);
+			res.redirect('/admin');
 	});
 });
 
