@@ -49,31 +49,26 @@ router.get('/addpage', function (req, res) {
 });
 
 router.post('/addpage', function (req, res) {
-	pageModel.findOne({ url: req.body.URL }, function (err, page) {
-		if (err) return res.send(err);
-		// Display message to user if the URL is taken
-		if (page)
-			res.render('addpage', { urlErr: 'That URL has been taken!'});
-		// Create a new account
-		else
+	var newPage = new pageModel({
+		title: req.body.title,
+		author: {
+			email: req.user.email,
+			name: req.user.name,
+			_id: req.user._id,
+		},
+		content: req.body.content,
+		url: req.body.URL,
+		template: req.body.template,
+		visible: true,
+	});
+	newPage.save(function(err, user){
+		if (err) 
 		{
-			var newPage = new pageModel({
-				title: req.body.title,
-				author: {
-					email: req.user.email,
-					name: req.user.name,
-					_id: req.user._id,
-				},
-				content: req.body.content,
-				url: req.body.URL,
-				template: req.body.template,
-				visible: true,
-			});
-			newPage.save(function(err, user){
-				if (err) return console.log(err);
-				res.redirect('/admin');
-			});
+			if (err.code === 11000)
+				return res.render('addpage', { urlErr: 'That URL has been taken!' });
+			return res.send(err);
 		}
+		res.redirect('/admin');
 	});
 });
 
