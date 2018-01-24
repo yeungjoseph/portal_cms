@@ -104,11 +104,11 @@ router.post('/edit/:id', function(req, res) {
 		// Check if page exists and if the user is the author before editting
 		if (page && req.user._id.toString() == page.author._id.toString()) {
 			// Check for duplicate URL
-			pageModel.findOne({ _id: req.body.iid }, function (err, dup) {
+			pageModel.findOne({ url: req.body.URL }, function (err, dup) {
 				if (err) return res.send(err);
 				// Check that this URL does not exist in the current database or
 				// if it does, it belongs to the current page.
-				if (!dup || (dup && dup.url === req.params.url)) {
+				if (!dup || (dup && dup.url === req.body.URL)) {
 					// Set page values
 					page.title = req.body.title;
 					page.content = req.body.content;
