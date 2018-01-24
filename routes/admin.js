@@ -31,7 +31,7 @@ router.post('/editadmin', function (req, res) {
 			if (req.body.password1 === req.body.password2)
 			{
 				// Find the model and update it
-				userModel.findByIdAndUpdate( { _id: req.user._id }, 
+				userModel.findByIdAndUpdate(req.user._id, 
 					{ $set: { name: req.body.name, email: req.body.email, password: req.body.password1 }}, 
 					function(err, user) { if (err) return res.send(err); }
 				);
@@ -56,16 +56,12 @@ router.get('/addpage', function (req, res) {
 	res.render('addpage', {});
 });
 
-router.post('/addpage/send', function (req, res) {
+router.post('/addpage', function (req, res) {
 	pageModel.findOne({ url: req.body.URL }, function (err, page) {
-		if (err)
-		{
-			console.error(err);
-			return res.send(err);
-		}
+		if (err) return res.send(err);
 		// Display message to user if the URL is taken
 		if (page)
-			return res.render('addpage', { urlErr: 'That URL has been taken!'});
+			res.render('addpage', { urlErr: 'That URL has been taken!'});
 		// Create a new account
 		else
 		{
@@ -94,12 +90,10 @@ router.get('/edit/:id', function(req, res) {
 	pageModel.findById(req.params.id.trim(), function(err, page) {
 		if (err) return res.send(err);
 		// Check if page exists and if the user is the author before editting
-		if (page && req.user._id.toString() == page.author._id.toString()) {
+		if (page && req.user._id.toString() == page.author._id.toString())
 			res.render('editpage', { page: page });
-		}
-		else {
+		else 
 			res.redirect('/admin');
-		}
 	});
 });
 
@@ -129,9 +123,8 @@ router.post('/edit/:id', function(req, res) {
 					res.render('editpage', { page: page, urlErr: 'That URL has been taken!'});
 			});
 		}
-		else {
+		else 
 			res.redirect('/admin');
-		}
 	});
 });
 

@@ -13,22 +13,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/auth', function (req, res) {
-	res.render('auth', {});
+	res.render('auth');
 });
 
 router.post('/auth/register', function(req, res) {
 	// Check that the email is not already in use
 	userModel.findOne({ email: req.body.email }, function (err, user) {
-		if (err)
-		{
-			console.error(err);
-			return res.send(err);
-		}
+		if (err) return res.send(err);
 		// Display message to user if the email is taken
 		if (user)
-		{
-			return res.render('auth', { regErr: 'Email is already in use!'});
-		}
+			res.render('auth', { regErr: 'Email is already in use!'});
 		// Create a new account
 		else
 		{
@@ -50,25 +44,14 @@ router.post('/auth/login', function(req, res) {
 	var email = req.body.email;
 	var password = req.body.password;
 	userModel.findOne({ email: email }, function (err, user) {
-		if (err) 
-		{
-			console.err(err);
-			return res.send(err);
-		}
-		else if (user == null || password != user.password)
-		{
-			//Show error message for email not existing
-			return res.render('auth', { loginErr: 'Email or password is incorrect.'});
-		}
-		/*else if (password != user.password)
-		{
-			//Show error message for wrong password
-			return res.render('auth', { loginErr: 'Password is incorrect'});
-		}*/
+		if (err) return res.send(err);
+		//Show error message if login credentials are incorrect
+		if (user == null || password != user.password)
+			res.render('auth', { loginErr: 'Email or password is incorrect.'});
 		else
 		{
 			req.session.user = user; // Sets the response header to add a cookie
-			return res.redirect('/admin');
+			res.redirect('/admin');
 		}
 	});	
 });
