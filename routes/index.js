@@ -17,26 +17,20 @@ router.get('/auth', function (req, res) {
 });
 
 router.post('/auth/register', function(req, res) {
-	// Check that the email is not already in use
-	userModel.findOne({ email: req.body.email }, function (err, user) {
-		if (err) return res.send(err);
-		// Display message to user if the email is taken
-		if (user)
-			res.render('auth', { regErr: 'Email is already in use!'});
-		// Create a new account
-		else
+	var newUser = new userModel({
+		name: req.body.name,
+		email: req.body.email,
+		password: req.body.password,
+	});
+	newUser.save(function(err, user) {
+		if (err) 
 		{
-			var newUser = new userModel({
-				name: req.body.name,
-				email: req.body.email,
-				password: req.body.password,
-			});
-			newUser.save(function(err, user) {
-				if (err) return console.log(err);
-				req.session.user = user;
-				res.redirect('/admin');
-			});
+			if (err.code == 11000)
+				return res.render('auth', { regErr: 'Email is already in use!'});
+			return res.send(err);
 		}
+		req.session.user = user;
+		res.redirect('/admin');
 	});
 });
 
