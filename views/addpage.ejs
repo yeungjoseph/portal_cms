@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
-	<% include admin-header %>
+	<head>
+		<title>Add a New Page</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"/>
+	</head>
 	<body>
 		<header>Add a Page</header>
-		<nav>
-			<a href="/admin">Home</a>  |
-			<a href="/admin/editadmin">Edit Account</a>  |
-			<a href="/admin/logout" id="login">Logout</a>	
-		</nav>
+		<% include admin-header %>
 		
 		<div class="content bg">
 			<% if(typeof urlErr !== 'undefined') { %>

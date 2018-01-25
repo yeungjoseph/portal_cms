@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html>
-	<% include admin-header %>
+	<head>
+		<title>Authentication Page</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"/>
+	</head>
 	<body>
-		<header>Admin Login Page</header>
-		<nav>
-			<a href="/">Home</a>  |
-			<a href="">Link 1</a>  |
-			<a href="">Link 2</a>  |
-			<a href="">Link 3</a>  |
-			<a href="">Link 4</a>  |
-			<a href="">Link 5</a>  |
-			<a href="/auth" id="login">Login</a>	
-		</nav>
-		
+		<header>Admin</header>
+		<% include header %>
 		<div class="content">
 			<h2>Sign up</h2> <hr/>
 			<% if(typeof regErr !== 'undefined') { %>

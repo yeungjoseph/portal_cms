@@ -1,15 +1,14 @@
 var express = require('express');
 var userModel = require('../models/user');
+var pageQuery = require('../utils/pages');
 var pageModel = require('../models/page');
 var router = express.Router();
 
+router.use(pageQuery.queryPages);
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('template', { 
-		title: 'Home',
-		content: "Welcome to the homepage."
-	});
+	res.render('home');
 });
 
 router.get('/auth', function (req, res) {

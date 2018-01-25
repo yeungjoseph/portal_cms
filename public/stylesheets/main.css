@@ -3,13 +3,13 @@ html, body {
 	height: 100%;
 }
 
+h1 {
+	font-family: Arial;
+}
+
 body {
 	display: flex;
 	flex-direction: column;
-}
-
-a, a:visited, a:hover {
-	text-decoration: none;
 }
 
 header {
@@ -27,12 +27,14 @@ nav {
 }
 
 #login {
-  padding-right: 10px;
+	padding-right: 10px;
 	float: right;
 }
 
 nav a {
-	padding-left: 10px;
+	font-size: 1em;
+	padding: 4px 10px 4px 10px;
+	float: left;
 }
 
 nav a, footer a {
@@ -40,8 +42,21 @@ nav a, footer a {
 	font-family: courier;
 }
 
-nav a:first-child {
-  padding-left: 10px;
+.dropdown {
+	float: left;
+}
+
+.dropbtn {
+	padding: 4px 10px 4px 10px;
+	background-color: black;
+	color: white;
+	border: none;
+	font-family: courier;
+	font-size: 1em;
+}
+
+a, a:visited, a:hover {
+	text-decoration: none;
 }
 
 .content {
@@ -51,6 +66,16 @@ nav a:first-child {
 
 p {
 	font-family: Arial;
+}
+
+.page-list {
+	font-size: 1.8em;
+	color: black;
+	font-family: verdana;
+}
+
+ul {
+	list-style: none;
 }
 
 footer {

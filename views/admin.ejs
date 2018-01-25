@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
-	<% include admin-header %>
+	<head>
+		<title>Admin Dashboard</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"/>
+	</head>
 	<body>
 		<header>Admin Dashboard</header>
-		<nav>
-			<a href="/admin">Home</a>  |
-			<a href="/admin/addpage">Add Page</a>  |
-			<a href="/admin/editadmin">Edit Account</a>  |
-			<a href="/admin/logout" id="login">Logout</a>	
-		</nav>
+		<% include admin-header %>
 		
 		<div class="content bg">
 			<table id="dash">

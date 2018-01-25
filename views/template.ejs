@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html>
-	<% include header %>
+	<head>
+		<title><%= title %></title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
+	</head>
 	<body>
 		<header><%= title %></header>
-		<nav>
-			<a href="/">Home</a>  |
-			<a href="">Link 1</a>  |
-			<a href="">Link 2</a>  |
-			<a href="">Link 3</a>  |
-			<a href="">Link 4</a>  |
-			<a href="">Link 5</a>  |
-			<a href="/auth" id="login">Login</a>
-		</nav>
-		
+		<% include header %>
 		<div class="content">
 			<p><%= content %></p>
 		</div>

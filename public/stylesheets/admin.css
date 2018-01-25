@@ -21,6 +21,17 @@ form {
 	padding-top: 10px;
 }
 
+label.prettylabel {
+	font-family: verdana;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+select {
+	margin-bottom: 5px;
+	color: gray;
+}
+
 table#dash{
 	width: 700px;
 	height: 80%;
@@ -61,17 +72,6 @@ td a:visited, td a {
 }
 
 td a:hover {
-	color: gray;
-}
-
-label.prettylabel {
-	font-family: verdana;
-	font-weight: bold;
-	font-size: 12px;
-}
-
-select {
-	margin-bottom: 5px;
 	color: gray;
 }
 

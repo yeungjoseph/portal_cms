@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
-	<% include admin-header %>
+	<head>
+		<title>Admin Edit</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"/>
+	</head>
 	<body>
 		<header>Edit User Account</header>
-		<nav>
-			<a href="/admin">Home</a>  |
-			<a href="/admin/logout" id="login">Logout</a>	
-		</nav>
+		<% include admin-header %>
 		
 		<div class="content bg">
 			<% if(typeof editMsg !== 'undefined') { %>
