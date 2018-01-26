@@ -12,6 +12,12 @@ body {
 	flex-direction: column;
 }
 
+.bg {
+	background: linear-gradient(rgba(230,255,238,0.7), rgba(230,255,238,0.7)), 
+	url("../imgs/treebg.jpg");
+	background-size: cover;
+}
+
 header {
 	color: black;
 	font-size: 3em;
@@ -74,6 +80,18 @@ nav a, footer a {
 
 a, a:visited, a:hover {
 	text-decoration: none;
+}
+
+#home-hr {
+	border-color: black;
+}
+
+#home-head, #home-body {
+	text-align: center;
+}
+
+.page-list {
+	margin-left: -20px;
 }
 
 .content {
