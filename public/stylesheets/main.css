@@ -44,15 +44,32 @@ nav a, footer a {
 
 .dropdown {
 	float: left;
+	overflow: hidden;
 }
 
 .dropbtn {
 	padding: 4px 10px 4px 10px;
 	background-color: black;
 	color: white;
-	border: none;
 	font-family: courier;
 	font-size: 1em;
+	border: none;
+	outline: none;
+	box-shadow: none;
+
+}
+
+.dropdown-content {
+	display: none;
+	background-color: black;
+	z-index: 1;
+	position: absolute;
+	padding: 4px 10px 4px 0px;
+	max-width: 80px;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
 }
 
 a, a:visited, a:hover {

@@ -2,8 +2,10 @@
 	<a href="/">Home</a>
 	<div class="dropdown">
 		<button class="dropbtn">Pages</button>
-		<div class="dropdown-content" id="pageDropdown">
-			<!--Load that shit-->
+		<div class="dropdown-content">
+				<% for (var i = 0; i < pages.length; i++) {%>
+					<a href="/<%= pages[i].url %>"><%= pages[i].title %></a>
+				<% } %>
 		</div>
 	</div>
 	<a href="/auth" id="login">Login</a>
