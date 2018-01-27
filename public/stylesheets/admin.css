@@ -3,7 +3,6 @@ h2 {
 }
 
 hr {
-	width: 40%;
 	margin: 0;
 }
 
@@ -34,7 +33,7 @@ select {
 
 table#dash{
 	width: 700px;
-	height: 80%;
+	height: 600px;
 	color: #494747;
 	margin: auto;
 	background-color: #dfdfdf;
@@ -91,14 +90,28 @@ div.bg {
 
 .within {
 	display: inline;
+	margin: 0;
+	padding: 0;
 }
 
-.visible {
+.btn-visibility {
 	background-color: green;
 	color: white;
 }
 
-.invisible {
+.btn-visibility.invisible {
 	background-color: red;
-	color: white;
+}
+
+#btn-edit {
+	margin: 0;
+}
+
+.addpage {
+	margin: auto;
+	width: 400px;
+}
+
+hr#short {
+	width: 40%;
 }

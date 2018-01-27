@@ -44,10 +44,6 @@ router.post('/editadmin', function (req, res) {
 		res.render('editadmin', { editMsg: 'The passwords did not match', person: req.user });
 });
 
-router.get('/addpage', function (req, res) {
-	res.render('addpage');
-});
-
 router.post('/addpage', function (req, res) {
 	var newPage = new pageModel({
 		title: req.body.title,
@@ -57,7 +53,7 @@ router.post('/addpage', function (req, res) {
 			_id: req.user._id,
 		},
 		content: req.body.content,
-		url: req.body.URL,
+		url: req.body.url,
 		template: req.body.template,
 		visible: true,
 	});
@@ -73,7 +69,7 @@ router.post('/addpage', function (req, res) {
 });
 
 // Load a page for editting
-router.get('/edit/:id', function(req, res) {
+router.get('/page/edit/:id', function(req, res) {
 	pageModel.findOne({ _id: req.params.id.trim(), 'author._id': req.user._id }, 
 	function(err, page) {
 		if (err) return res.send(err);
@@ -110,7 +106,7 @@ router.post('/edit/:id', function(req, res) {
 });
 
 // Toggle visibility of a page
-router.post('/visible/:id', function(req, res) {
+router.post('/page/visibility/:id', function(req, res) {
 	pageModel.findOne({ _id: req.params.id.trim(), 'author._id': req.user._id },
 	 function(err, page) {
 		if (err) return res.send(err);
@@ -128,11 +124,12 @@ router.post('/visible/:id', function(req, res) {
 });
 
 // Delete a page
-router.post('/delete/:id', function(req, res) {
+router.delete('/page/:id', function(req, res) {
 	pageModel.remove({ _id: req.params.id.trim(), 'author._id': req.user._id },
 		function(err) {
 			if (err) return res.send(err);
-			res.redirect('/admin');
+			// 303 code redirects as a GET request rather than a DELETE
+			res.redirect(303, '/admin');
 	});
 });
 
