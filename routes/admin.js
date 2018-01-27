@@ -57,14 +57,9 @@ router.post('/addpage', function (req, res) {
 		template: req.body.template,
 		visible: true,
 	});
-	newPage.save(function(err, user){
-		if (err) 
-		{
-			if (err.code === 11000)
-				return res.render('addpage', { urlErr: 'That URL has been taken!' });
-			return res.send(err);
-		}
-		res.redirect('/admin');
+	newPage.save(function(err, page) {
+		if (err) return res.status(500).send(err);
+		return res.send(page);
 	});
 });
 
@@ -109,15 +104,14 @@ router.post('/edit/:id', function(req, res) {
 router.post('/page/visibility/:id', function(req, res) {
 	pageModel.findOne({ _id: req.params.id.trim(), 'author._id': req.user._id },
 	 function(err, page) {
-		if (err) return res.send(err);
-		if (!page) 
-			return res.redirect('/auth');
+		if (err) return res.status(500).send(err);
+		if (!page) return res.status(404).send("Page not found.");
 		else {
 			// Switch the visibility setting
 			page.visible = page.visible ? false : true;
 			page.save( function(err) {
-				if (err) return res.send(err);
-				return res.redirect('/admin');
+				if (err) return res.status(500).send(err);
+				return res.send("Successfully saved!");
 			});
 		}
 	});
@@ -126,10 +120,9 @@ router.post('/page/visibility/:id', function(req, res) {
 // Delete a page
 router.delete('/page/:id', function(req, res) {
 	pageModel.remove({ _id: req.params.id.trim(), 'author._id': req.user._id },
-		function(err) {
-			if (err) return res.send(err);
-			// 303 code redirects as a GET request rather than a DELETE
-			res.redirect(303, '/admin');
+		function(err) { 
+			if (err) return res.status(500).send(err);
+			res.send("Successfully deleted!");
 	});
 });
 

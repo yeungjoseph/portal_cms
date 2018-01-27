@@ -88,6 +88,13 @@ div.bg {
 	font-family: verdana;
 }
 
+.add-error {
+	color: red;
+	font-weight: bold;
+	font-family: verdana;
+	text-align: center;
+}
+
 .within {
 	display: inline;
 	margin: 0;
