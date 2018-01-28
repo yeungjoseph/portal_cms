@@ -78,12 +78,9 @@ td a:hover {
 	color: gray;
 }
 
-div.bg {
-	background: linear-gradient(to bottom right, black , white);
-}
-
 .content.bg {
 	color: white;
+	background: linear-gradient(to bottom right, black , white);
 }
 
 .auth-error {
@@ -137,4 +134,8 @@ hr.short {
 
 .ui-dialog-titlebar {
 	background-color: white;
+}
+
+.ui-dialog-titlebar-close {
+	margin-top: 10px;
 }

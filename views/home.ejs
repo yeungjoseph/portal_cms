@@ -4,13 +4,26 @@
 		<title>Home</title>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
 	</head>
-	<body>
-		<header>Home</header>
-        <% include header %>
+	<body class="bg home">
+
+        <nav class="home">
+			<a href="/">Home</a>
+			<div class="dropdown">
+				<button class="dropbtn home">Pages</button>
+				<div class="dropdown-content">
+						<% for (var i = 0; i < pages.length; i++) {%>
+							<a href="/<%= pages[i].url %>"><%= pages[i].title %></a>
+						<% } %>
+				</div>
+			</div>
+			<a href="/auth" id="login">Login</a>
+		</nav>
+
+		<header>Welcome to the Home Page!</header>
         
-		<div class="content bg" id="home-body">
+		<div class="content home">
             <h1 id="home-head">Check out these pages!</h1>
-            <hr id='home-hr'>
+            <hr class="home">
             <!-- List all visible pages -->
             <ul>
             <% for (var i = 0; i < pages.length; i++) {%>
@@ -19,6 +32,10 @@
             </ul>
 		</div>
 		
-		<% include footer %>
+		<footer class="home">
+			<p>&copy 2018 The Portal CMS</p>
+			<p>Contact information: <a href="mailto:someone@example.com">
+			someone@example.com</a></p>
+		</footer>
 	</body>
 </html>
