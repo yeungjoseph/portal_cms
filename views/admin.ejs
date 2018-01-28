@@ -5,6 +5,7 @@
 		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"/>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	</head>
 	<body>
 		<header>Admin Dashboard</header>
@@ -12,7 +13,7 @@
 		
 		<div class="content bg">
 			<table id="dash">
-				<caption>Table of Pages</caption>
+				<caption>Table of Pages <button class="btn-add-page">Add Page</button></caption>
 				<% if(pages.length) { %>
 					<tr>
 						<th>Title</th>
@@ -43,12 +44,12 @@
 			</table>
 
 			<!-- Add page form -->
-			<div class="addpage">
+			<div id="addDialog">
 				<h1>Add Pages</h1> <hr>
 				<% if(typeof urlErr !== 'undefined') { %>
 					<h4 class="auth-error"><%= urlErr %></h4>
 				<% } %>
-				<form id="add-form" method="POST">
+				<form class="add-form" method="POST">
 				<!-- Title -->
 					<label class="prettylabel">Title:</label> <br/>
 					<input type="text" name="title" placeholder="Title of Page" required/> <br/>
@@ -100,7 +101,16 @@
 			});
 			e.preventDefault();
 		});
-		$('#add-form').submit(function(e) {
+		$('#addDialog').dialog({
+			width: 500,
+			height: 500,
+			autoOpen: false
+		});
+		$('#dash').on('click', '.btn-add-page', function(e) {
+			$('#addDialog').dialog('open');
+		});
+		$(".add-form").submit(function(e) {
+			e.preventDefault();
 			var formData = {
 				title		: $('input[name=title]').val(),
 				content		: $('textarea[name=content]').val(),
@@ -122,11 +132,11 @@
 						</form>
 						<button class="btn-visibility" data-page-id="${newPage._id}">Visible</button>	
 					</td></tr>`);
+				$('#addDialog').dialog('close');
 			})
 			.fail(function() {
 				$("#dash").after("<p class='add-error'>URL already exists!</p>");
 			});
-			e.preventDefault();
 		}); 
 	});
 	</script>

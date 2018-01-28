@@ -62,7 +62,6 @@ nav a, footer a {
 	border: none;
 	outline: none;
 	box-shadow: none;
-
 }
 
 .dropdown-content {
@@ -71,7 +70,13 @@ nav a, footer a {
 	z-index: 1;
 	position: absolute;
 	padding: 4px 10px 4px 0px;
-	max-width: 80px;
+	max-width: 160px;
+}
+
+.dropdown-content a {
+	float: none;
+	display: block;
+	overflow: hidden;
 }
 
 .dropdown:hover .dropdown-content {

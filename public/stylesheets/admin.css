@@ -61,6 +61,10 @@ caption {
 	background-color: #dfdfdf;
 }
 
+textarea {
+	resize: none;
+}
+
 button {
 	color: #494747;
 	padding: 4px 6px;
@@ -114,11 +118,23 @@ div.bg {
 	margin: 0;
 }
 
-.addpage {
+#addDialog {
 	margin: auto;
 	width: 400px;
 }
 
-hr#short {
-	width: 40%;
+hr.short {
+	width: 30%;
+}
+
+.ui-dialog-content {
+	background-color: white;
+	color: #333333;
+	overflow: auto;
+	padding-left: 15px;
+	padding-bottom: 10px;
+}
+
+.ui-dialog-titlebar {
+	background-color: white;
 }
