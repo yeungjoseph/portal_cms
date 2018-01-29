@@ -94,6 +94,11 @@ td a:hover {
 	font-weight: bold;
 	font-family: verdana;
 	text-align: center;
+	display: none;
+}
+
+.show {
+	display: inline;
 }
 
 .within {
@@ -122,20 +127,4 @@ td a:hover {
 
 hr.short {
 	width: 30%;
-}
-
-.ui-dialog-content {
-	background-color: white;
-	color: #333333;
-	overflow: auto;
-	padding-left: 15px;
-	padding-bottom: 10px;
-}
-
-.ui-dialog-titlebar {
-	background-color: white;
-}
-
-.ui-dialog-titlebar-close {
-	margin-top: 10px;
 }

@@ -4,8 +4,9 @@
 		<title>Admin Dashboard</title>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"/>
+		<link rel="stylesheet" href="/jquery-ui-1.12.1.custom/jquery-ui.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 	</head>
 	<body>
 		<header>Admin Dashboard</header>
@@ -44,18 +45,15 @@
 			</table>
 
 			<!-- Add page form -->
-			<div id="addDialog">
-				<h1>Add Pages</h1> <hr>
-				<% if(typeof urlErr !== 'undefined') { %>
-					<h4 class="auth-error"><%= urlErr %></h4>
-				<% } %>
+			<div id="addDialog" title="Add a Page">
+				<p class='add-error'>URL already exists!</p>
 				<form class="add-form" method="POST">
 				<!-- Title -->
 					<label class="prettylabel">Title:</label> <br/>
 					<input type="text" name="title" placeholder="Title of Page" required/> <br/>
 				<!-- Content -->
 					<label class="prettylabel">Content:</label> <br/>
-					<textarea name="content" rows="10" cols="50"></textarea> <br/>
+					<textarea name="content" rows="10" cols="40"></textarea> <br/>
 				<!-- URL -->
 					<label class="prettylabel">URL:</label> <br/>
 					<input type="text" name="URL" placeholder="URL of page"/> <br/>
@@ -136,7 +134,7 @@
 				$('#addDialog').dialog('close');
 			})
 			.fail(function() {
-				$("#dash").after("<p class='add-error'>URL already exists!</p>");
+				$("#addDialog p").addClass("show");
 			});
 		}); 
 	});
