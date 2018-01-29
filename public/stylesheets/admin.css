@@ -36,7 +36,7 @@ table#dash{
 	height: 600px;
 	color: #494747;
 	margin: auto;
-	background-color: white;;
+	background-color: rgba(255,255,255,1);
 	padding: 5px;
 	font-family: Verdana;
 	text-align: center;
@@ -45,13 +45,13 @@ table#dash{
 caption {
 	font-size: 2.5em;
 	font-family: courier;
-	background-color: rgb(2, 70, 197);
+	background-color: rgb(2, 197, 83);
 	color: white;
 }
 
 .btn-add-page {
 	padding: 10px 18px;
-	background-color: rgb(13, 13, 196);
+	background-color: rgb(13, 169, 196);
 	color: white;
 	border-radius: 20px;
 	border: none;
