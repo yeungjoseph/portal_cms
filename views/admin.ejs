@@ -26,14 +26,14 @@
 							<td><a href="/<%= pages[i].url %>"><%= pages[i].title %></a></td>
 							<td>January 7, 2018</td>
 							<td>
-								<button class="btn-delete" data-page-id="<%= pages[i]._id %>">Delete</button>
+								<button class="btn-delete" data-page-id="<%= pages[i]._id %>"></button>
 								<form method="GET" class='within'>
-									<input type='submit' value='Edit' id="btn-edit" formaction='/admin/page/edit/<%= pages[i]._id %>' />
+									<input type='submit' value='' id="btn-edit" formaction='/admin/page/edit/<%= pages[i]._id %>' />
 								</form>	
 								<% if(pages[i].visible) { %>
-								<button class="btn-visibility" data-page-id="<%= pages[i]._id %>">Visible</button>
+								<button class="btn-visibility" data-page-id="<%= pages[i]._id %>"></button>
 								<% }else { %>
-								<button class="btn-visibility invisible" data-page-id="<%= pages[i]._id %>">Visible</button>
+								<button class="btn-visibility invisible" data-page-id="<%= pages[i]._id %>"></button>
 								<% } %>
 							</td>
 						</tr>
@@ -125,11 +125,11 @@
 				$("#dash").append(`<tr><td><a href="/${newPage.url}">${newPage.title}</a></td>
 					<td>January 7, 2018</td>
 					<td>
-						<button class="btn-delete" data-page-id="${newPage._id}">Delete</button>
+						<button class="btn-delete" data-page-id="${newPage._id}"></button>
 						<form method="GET" class='within'>
-							<input type='submit' value='Edit' id="btn-edit" formaction='/admin/page/edit/${newPage._id}' />
+							<input type='submit' value='' id="btn-edit" formaction='/admin/page/edit/${newPage._id}' />
 						</form>
-						<button class="btn-visibility" data-page-id="${newPage._id}">Visible</button>	
+						<button class="btn-visibility" data-page-id="${newPage._id}"></button>	
 					</td></tr>`);
 				$('#addDialog').dialog('close');
 			})
