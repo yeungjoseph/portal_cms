@@ -111,7 +111,7 @@ router.post('/page/visibility/:id', function(req, res) {
 			page.visible = page.visible ? false : true;
 			page.save( function(err) {
 				if (err) return res.status(500).send(err);
-				return res.send("Successfully saved!");
+				res.end();
 			});
 		}
 	});
@@ -122,7 +122,7 @@ router.delete('/page/:id', function(req, res) {
 	pageModel.remove({ _id: req.params.id.trim(), 'author._id': req.user._id },
 		function(err) { 
 			if (err) return res.status(500).send(err);
-			res.send("Successfully deleted!");
+			res.end();
 	});
 });
 

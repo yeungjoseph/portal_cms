@@ -148,7 +148,7 @@ td a:hover {
 	position: absolute;
 	transform: translate(-50%, -50%);
 	color: white;
-	background-color: orange;
+	background-color: rgb(62, 202, 62);
 	z-index: 1;
 	padding: 15px 15px;
 	border-radius: 20px;
@@ -162,7 +162,7 @@ td a:hover {
 
 .close-form {
 	float: right;
-	background-color: orange;
+	background-color: rgb(62, 202, 62);
 	border: none;
 	font-weight: bold;
 	font-family: verdana;
@@ -172,6 +172,13 @@ td a:hover {
 .modal-background {
 	background-color: rgba(0,0,0,0.5);
 	height: 100%;
+}
+
+form.add-form input[type="submit"], form.add-form input[type="reset"] {
+	color: white;
+	background-color: green;
+	border-radius: 10px;
+	border: none;
 }
 
 .show {
