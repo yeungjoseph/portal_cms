@@ -4,9 +4,7 @@
 		<title>Admin Dashboard</title>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
 		<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"/>
-		<link rel="stylesheet" href="/jquery-ui-1.12.1.custom/jquery-ui.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-		<script src="/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
 	</head>
 	<body>
 		<header>Admin Dashboard</header>
@@ -45,29 +43,34 @@
 			</table>
 
 			<!-- Add page form -->
-			<div id="addDialog" title="Add a Page">
-				<p class='add-error'>URL already exists!</p>
-				<form class="add-form" method="POST">
-				<!-- Title -->
-					<label class="prettylabel">Title:</label> <br/>
-					<input type="text" name="title" placeholder="Title of Page" required/> <br/>
-				<!-- Content -->
-					<label class="prettylabel">Content:</label> <br/>
-					<textarea name="content" rows="10" cols="40"></textarea> <br/>
-				<!-- URL -->
-					<label class="prettylabel">URL:</label> <br/>
-					<input type="text" name="URL" placeholder="URL of page"/> <br/>
-				<!-- Template -->
-					<label class="prettylabel">Template:</label> <br/>
-					<select name="template" required>
-						<option value="t1">Template 1</option>
-						<option value="t2">Template 2</option>
-						<option value="t3">Template 3</option>
-					</select> <br/>
-				<!-- Clear/Save -->
-					<input type="reset" value="Clear"/>
-					<input type="submit" value="Save" class="btn-add"/>
-				</form>
+			<div class="modal-container">
+				<div class="add-form-container">
+					<h2 class="form-title">Add Page</h2>
+					<button class="close-form">X</button><br>
+					<form class="add-form" method="POST">	
+					<!-- Title -->
+						<label class="prettylabel">Title:</label> <br/>
+						<input type="text" name="title" placeholder="Title of Page" required/> <br/>
+					<!-- Content -->
+						<label class="prettylabel">Content:</label> <br/>
+						<textarea name="content" rows="10" cols="40"></textarea> <br/>
+					<!-- URL -->
+						<p class='add-error'>URL already exists!<br></p>
+						<label class="prettylabel">URL:</label> <br/>
+						<input type="text" name="URL" placeholder="URL of page"/> <br/>
+					<!-- Template -->
+						<label class="prettylabel">Template:</label> <br/>
+						<select name="template" required>
+							<option value="t1">Template 1</option>
+							<option value="t2">Template 2</option>
+							<option value="t3">Template 3</option>
+						</select> <br/>
+					<!-- Clear/Save -->
+						<input type="reset" value="Clear"/>
+						<input type="submit" value="Save" class="btn-add"/>
+					</form>
+				</div>
+				<div class="modal-background"></div>
 			</div>
 		</div>
 		<% include footer %>
@@ -99,14 +102,16 @@
 			});
 			e.preventDefault();
 		});
-		$('#addDialog').dialog({
-			width: 500,
-			height: 500,
-			autoOpen: false,
-			resizable: false
-		});
 		$('#dash').on('click', '.btn-add-page', function(e) {
-			$('#addDialog').dialog('open');
+			$('.modal-container').addClass('show');
+		});
+		$('.modal-container').on('click', '.modal-background', function(e) {
+			$('.modal-container').removeClass('show');
+			$("p.add-error").removeClass("show-error");
+		});
+		$(".add-form-container").on('click', '.close-form', function(e) {
+			$('.modal-container').removeClass('show');
+			$("p.add-error").removeClass("show-error");
 		});
 		$(".add-form").submit(function(e) {
 			e.preventDefault();
@@ -131,10 +136,11 @@
 						</form>
 						<button class="btn-visibility" data-page-id="${newPage._id}"></button>	
 					</td></tr>`);
-				$('#addDialog').dialog('close');
+				$('.modal-container').removeClass('show');
+				$("p.add-error").removeClass("show-error");
 			})
 			.fail(function() {
-				$("#addDialog p").addClass("show");
+				$("p.add-error").addClass("show-error");
 			});
 		}); 
 	});

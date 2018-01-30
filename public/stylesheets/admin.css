@@ -83,22 +83,10 @@ td a:hover {
 	background: linear-gradient(to bottom right, black , white);
 }
 
-.auth-error {
+.auth-error, p.add-error {
 	color: red;
 	font-weight: bold;
 	font-family: verdana;
-}
-
-.add-error {
-	color: red;
-	font-weight: bold;
-	font-family: verdana;
-	text-align: center;
-	display: none;
-}
-
-.show {
-	display: inline;
 }
 
 .within {
@@ -145,9 +133,57 @@ td a:hover {
 	margin-left: 7px;
 }
 
-#addDialog {
-	margin: auto;
-	width: 400px;
+.modal-container {
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	display: none;
+	position: fixed;
+}
+
+.add-form-container {
+	top: 50%;
+	left: 50%;
+	position: absolute;
+	transform: translate(-50%, -50%);
+	color: white;
+	background-color: orange;
+	z-index: 1;
+	padding: 15px 15px;
+	border-radius: 20px;
+}
+
+.form-title {
+	display: inline;
+	padding: 0;
+	margin: 0;
+}
+
+.close-form {
+	float: right;
+	background-color: orange;
+	border: none;
+	font-weight: bold;
+	font-family: verdana;
+	color: white;
+}
+
+.modal-background {
+	background-color: rgba(0,0,0,0.5);
+	height: 100%;
+}
+
+.show {
+	display: block;
+}
+
+p.add-error {
+	display: none;
+}
+
+p.show-error {
+	display: inline;
 }
 
 hr.short {
