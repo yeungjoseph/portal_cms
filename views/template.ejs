@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title><%= title %></title>
+		<title pageid="<%= pageid %>"><%= title %></title>
+		<link rel="stylesheet" type="text/css" href="/content-tools.min.css">
 		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
 	</head>
 	<body>
 		<header><%= title %></header>
 		<% include header %>
 		
-		<div class="content">
+		<div class="content" data-editable data-name="content">
 			<%- content %>
 		</div>
 		
 		<% include footer %>
+		<script>var pageid = "<%= pageid %>"</script>
 	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="/content-tools.min.js"></script>
+	<script src="/editor.js"></script>
 </html>

@@ -101,6 +101,21 @@ router.post('/edit/:id', function(req, res) {
 	});
 });
 
+router.post('/edit2/:id', function(req, res) {
+	console.log(req.body.content);
+	pageModel.findOneAndUpdate({ _id: req.params.id.trim(), 'author._id': req.user._id},
+	{$set:{ content: req.body.content }},
+	{ new: true }, function(err, updatedPage) {
+		if (err) {
+			console.log(err);
+			res.status(500).send(err);
+		}
+		else {
+			res.end();
+		}
+	});
+});
+
 // Toggle visibility of a page
 router.post('/page/visibility/:id', function(req, res) {
 	pageModel.findOne({ _id: req.params.id.trim(), 'author._id': req.user._id },
