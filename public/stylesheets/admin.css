@@ -193,6 +193,16 @@ form.add-form input[type="submit"], form.add-form input[type="reset"] {
 	border: none;
 }
 
+.ql-editor {
+	background-color: white;
+	height: 150px;
+	color: gray;
+}
+
+.ql-toolbar {
+	background-color: rgb(211, 211, 211);
+}
+
 .show {
 	display: block;
 }
