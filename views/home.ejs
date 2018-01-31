@@ -16,7 +16,13 @@
 						<% } %>
 				</div>
 			</div>
+			<% if(typeof user !== 'undefined') { %>
+				<a href="/admin">Dashboard</a>
+				<a href="/admin/logout" id="login">Logout</a>	
+				<a href="/" id="welcome">Welcome <%= user.name %>!</a>
+			<% } else { %>
 			<a href="/auth" id="login">Login</a>
+			<% } %>
 		</nav>
 
 		<header>Welcome to the Home Page!</header>

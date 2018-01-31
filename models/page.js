@@ -7,7 +7,8 @@ var schema = mongoose.Schema({
 	content: { type: String, required: true },
 	url: { type: String, required: true, unique: true },
 	template: { type: String, required: true },
-	visible: { type: Boolean, required: true }
+	visible: { type: Boolean, required: true },
+	lastEdit: { type: Date, required: true}
 });
 
 module.exports = mongoose.model('pages', schema);

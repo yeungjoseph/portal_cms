@@ -32,7 +32,7 @@ nav {
 	width: 100%;
 }
 
-#login {
+#login, #welcome {
 	padding-right: 10px;
 	float: right;
 }

@@ -56,6 +56,7 @@ router.post('/addpage', function (req, res) {
 		url: req.body.url,
 		template: req.body.template,
 		visible: true,
+		lastEdit: Date.now()
 	});
 	newPage.save(function(err, page) {
 		if (err) return res.status(500).send(err);
@@ -78,7 +79,7 @@ router.get('/page/edit/:id', function(req, res) {
 // Save edits to a page
 router.post('/edit/:id', function(req, res) {
 	pageModel.findOneAndUpdate({ _id: req.params.id.trim(), 'author._id': req.user._id},
-	{$set:{ title: req.body.title, content: req.body.content, url: req.body.URL }},
+	{$set:{ title: req.body.title, content: req.body.content, url: req.body.URL, lastEdit: Date.now() }},
 	{ new: true }, function(err, updatedPage) {
 		if (err) {
 			if (err.code === 11000) {

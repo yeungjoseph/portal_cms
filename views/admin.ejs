@@ -21,8 +21,8 @@
 					</tr>
 					<% for (var i = 0; i < pages.length; i++) {%>
 						<tr>
-							<td><a href="/<%= pages[i].url %>"><%= pages[i].title %></a></td>
-							<td>January 7, 2018</td>
+							<td class="title"><a href="/<%= pages[i].url %>"><%= pages[i].title %></a></td>
+							<td class="date"><%= pages[i].lastEdit %></td>
 							<td>
 								<button class="btn-delete" data-page-id="<%= pages[i]._id %>"></button>
 								<form method="GET" class='within'>
@@ -128,7 +128,7 @@
 			})
 			.done(function(newPage) {
 				$("#dash").append(`<tr><td><a href="/${newPage.url}">${newPage.title}</a></td>
-					<td>January 7, 2018</td>
+					<td>${newPage.lastEdit}</td>
 					<td>
 						<button class="btn-delete" data-page-id="${newPage._id}"></button>
 						<form method="GET" class='within'>

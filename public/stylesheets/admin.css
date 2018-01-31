@@ -33,13 +33,25 @@ select {
 
 table#dash{
 	width: 700px;
-	height: 600px;
+	max-height: 800px;
 	color: #494747;
 	margin: auto;
 	background-color: rgba(255,255,255,1);
 	padding: 5px;
 	font-family: Verdana;
 	text-align: center;
+}
+
+td {
+	padding: 50px 0px;
+}
+
+td.title {
+	width: 150px;
+}
+
+td.date {
+	width: 250px;
 }
 
 caption {
