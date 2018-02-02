@@ -83,7 +83,6 @@ router.post('/edit/:id', function(req, res) {
 	{ new: true }, function(err, updatedPage) {
 		if (err) {
 			if (err.code === 11000) {
-				console.log('duplicate url');
 				return res.render('editpage', { page: {
 					_id: req.params.id.trim(),
 					title: req.body.title,

@@ -132,6 +132,18 @@ div.content.home, div.content.template {
 	border-radius: 20px;
 }
 
+.home-pl {
+	padding: 7px 0px;
+}
+
+.home-pl:nth-child(even) {
+	background-color: rgba(255,255,255,0.24);
+}
+
+.home-pl:nth-child(odd) {
+	background-color: rgba(255,255,255,0.15);
+}
+
 div.content.home {
 	text-align: center;
 }
@@ -144,8 +156,9 @@ div.content.home {
 .page-list {
 	margin-left: -20px;
 	font-size: 1.8em;
-	font-family: verdana;
-	color: rgb(2, 39, 2);
+	font-family: 'Helvetica';
+	font-weight: bold;
+	color: rgb(45, 65, 45);
 }
 
 .home, nav.home a {

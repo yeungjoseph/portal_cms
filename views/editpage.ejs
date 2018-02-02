@@ -6,10 +6,11 @@
 		<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css"/>
 	</head>
 	<body>
-		<header>Edit Page</header>
+		<header>Advanced - Edit Page</header>
 		<% include admin-header %>
 		
 		<div class="content bg">
+			<h2>Edit Page</h2><hr class="short">
 			<% if(typeof urlErr !== 'undefined') { %>
 			<h4 class="auth-error"><%= urlErr %></h4>
 			<% } %>
@@ -31,7 +32,7 @@
 					<option value="t3">Template 3</option>
 				</select> <br/>
 			<!-- Clear/Save -->
-				<input type="reset" value="Clear"/>
+				<input type="reset" value="Revert"/>
 				<input type="submit" value="Save"/>
 			</form>
 		</div>
