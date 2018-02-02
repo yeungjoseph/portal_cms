@@ -6,25 +6,7 @@
 	</head>
 	<body class="bg home">
 
-        <nav class="home">
-			<a href="/">Home</a>
-			<div class="dropdown">
-				<button class="dropbtn home">Pages</button>
-				<div class="dropdown-content">
-						<% for (var i = 0; i < pages.length; i++) {%>
-							<a href="/<%= pages[i].url %>"><%= pages[i].title %></a>
-						<% } %>
-				</div>
-			</div>
-			<% if(typeof user !== 'undefined') { %>
-				<a href="/admin">Dashboard</a>
-				<a href="/admin/logout" id="login">Logout</a>	
-				<a href="/" id="welcome">Welcome <%= user.name %>!</a>
-			<% } else { %>
-			<a href="/auth" id="login">Login</a>
-			<% } %>
-		</nav>
-
+		<% include user-header %>
 		<header>Welcome to the Home Page!</header>
         
 		<div class="content home">
@@ -38,10 +20,6 @@
             </ul>
 		</div>
 		
-		<footer class="home">
-			<p>&copy 2018 The Portal CMS</p>
-			<p>Contact information: <a href="mailto:someone@example.com">
-			someone@example.com</a></p>
-		</footer>
+		<% include user-footer %>
 	</body>
 </html>

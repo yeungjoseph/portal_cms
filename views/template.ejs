@@ -5,15 +5,15 @@
 		<link rel="stylesheet" type="text/css" href="/content-tools.min.css">
 		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
 	</head>
-	<body>
-		<header><%= title %></header>
-		<% include header %>
-		
-		<div class="content" data-editable data-name="content">
+	<body class="bg home">
+		<% include user-header %>
+		<header><%= title %></header>	
+	
+		<div class="content template" data-editable data-name="content">
 			<%- content %>
 		</div>
 		
-		<% include footer %>
+		<% include user-footer %>
 		<script>var pageid = "<%= pageid %>"</script>
 	</body>
 	<% if (typeof user != 'undefined') { %>
