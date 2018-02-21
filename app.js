@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user');
+//var cors = require('cors');
 
 var index = require('./routes/index');
 var admin = require('./routes/admin');
@@ -32,6 +33,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+/*app.use(cors({
+  origin: 'http://127.0.0.1:3000',
+  credentials: true
+}));*/
 
 // Session handling
 app.use(session({

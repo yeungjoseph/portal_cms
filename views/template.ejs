@@ -3,6 +3,7 @@
 	<head>
 		<title pageid="<%= pageid %>"><%= title %></title>
 		<link rel="stylesheet" type="text/css" href="/content-tools.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="/stylesheets/main.css"/>
 	</head>
 	<body class="bg home">
@@ -12,13 +13,136 @@
 		<div class="content template" data-editable data-name="content">
 			<%- content %>
 		</div>
+
+		<button class="btn-share">Share</button>
+
+		<div class="modal fade" id="twitter">
+			<div class="modal-dialog">
+				<div class="modal-content">
+				</div>
+			</div>
+		</div>
 		
 		<% include user-footer %>
-		<script>var pageid = "<%= pageid %>"</script>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="http://127.0.0.1:3000/socket.io/socket.io.js"></script>
+		<% if (typeof user != 'undefined') { %>
+			<script src="/content-tools.min.js"></script>
+			<script src="/editor.js"></script>
+		<% } %>
+		<script>
+			var pageid = "<%= pageid %>"
+			var pageurl = "<%= url %>"
+			$(".home").on('click', '.btn-share', function(e) {
+				$.ajax({
+					method: "GET",
+					url: 'http://127.0.0.1:3000/',
+					xhrFields: {
+						withCredentials: true
+					}
+				})
+				.done(function(page) {
+					$('.modal-content').html(page);
+					$('#twitter').modal('show');
+
+					//send a tweet
+					$("#tweet").val(`127.0.0.1:3050/${pageurl}`);
+					$('#twitter').on('click', '#tweet-send', function(ev) {
+								ev.preventDefault();
+								console.log('tweet sended!!!!');
+								var author = $(".username").text();
+								var handle = $(".user-handle").text();
+								var content = $("#tweet").val();
+								console.log(content);
+								$.ajax({
+									method: 'POST',
+									url: "http://127.0.0.1:3000/tweet",
+									xhrFields: {
+										withCredentials: true
+									},
+									data: {
+										author: author,
+										handle: handle,
+										content: content,
+									}
+								})
+								.done(function(newTweet) {
+									showLikedTweet(author, handle, content, newTweet._id, 1);
+									$("#tweet").val("");
+									// Increment tweet counter
+									var twcount = Number($("#twcount").text());
+									$("#twcount").text(twcount + 1);
+								});
+								
+					});
+
+					//click login button
+					$('#twitter').on('click', '#btn-login', function(e) {
+						e.preventDefault();			
+						$.ajax({
+							method: "POST",
+							url: "http://127.0.0.1:3000/login",
+							xhrFields: {
+								withCredentials: true
+							},
+							data: {
+								email: $("#login-form input[name=email]").val(),
+								password: $("#login-form input[name=password]").val(),
+							}
+						})
+						.done(function(user_page) {
+							$('.modal-content').html(user_page);
+							$("#tweet").val(`127.0.0.1:3050/${pageurl}`);
+							$('#twitter').on('click', '#tweet-send', function(ev) {
+								ev.preventDefault();			
+							});
+						});
+					});
+
+					//click registration button
+					$('#twitter').on('click', '#btn-reg', function(e) {
+						e.preventDefault();			
+						$.ajax({
+							method: "POST",
+							url: "http://127.0.0.1:3000/user",
+							xhrFields: {
+								withCredentials: true
+							},
+							data: {
+								display_name: $("#register-form input[name=display_name]").val(),
+								email: $("#register-form input[name=email]").val(),
+								password: $("#register-form input[name=password]").val(),
+								handle: $("#register-form input[name=handle]").val(),
+							}
+						})
+						.done(function(user_page) {
+							$('.modal-content').html(user_page);
+							$("#tweet").val(`127.0.0.1:3050/${pageurl}`);
+							$('#twitter').on('click', '#tweet-send', function(ev) {
+								ev.preventDefault();			
+							});
+						});
+					});
+
+					//click logout button
+					$('#twitter').on('click', "#logout", function(e) {
+						e.preventDefault();
+						$.ajax({
+							method: "GET",
+							url: "http://127.0.0.1:3000/logout",
+							xhrFields: {
+								withCredentials: true
+							},
+						})
+						.done(function(page) {
+							$('.modal-content').html(page);
+						});
+					});
+				});
+			});
+		</script>
 	</body>
-	<% if (typeof user != 'undefined') { %>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<script src="/content-tools.min.js"></script>
-	<script src="/editor.js"></script>
-	<% } %>
 </html>

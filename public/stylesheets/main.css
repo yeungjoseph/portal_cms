@@ -165,6 +165,18 @@ div.content.home {
 	color: rgb(2, 39, 2);
 }
 
+.btn-share {
+	width: 60px;
+	height: 30px;
+	background-color: blue;
+	color: white;
+	border: none;
+	outline: none;
+	text-align: center;
+	margin-left: 50px;
+	margin-top: 10px;
+}
+
 footer.home p a, footer.home {
 	color: rgba(196, 196, 196, 0.904);
 	text-align: center;
